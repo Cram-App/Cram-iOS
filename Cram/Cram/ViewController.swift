@@ -8,9 +8,49 @@
 
 import UIKit
 import GameKit
+import FBSDKCoreKit
+import FBSDKLoginKit
+import FBSDKShareKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, FBSDKLoginButtonDelegate {
     
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+        if error == nil {
+            
+            //profileImgVIew.image = UIImage(named: "face")
+            //personName.text = "Robert Hernandez"
+            
+        }
+        
+        return
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        
+        return
+    }
+    
+    func loginToFB(){
+        
+        //Facebook Account Token
+        let accessToken = FBSDKAccessToken.current()
+        
+        if accessToken == nil{
+            let loginButton = FBSDKLoginButton()
+            loginButton.delegate = self
+            loginButton.loginBehavior = FBSDKLoginBehavior.native
+            
+            FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self) { (result, err) in
+                if err != nil {
+                    print("Login failed")
+                }
+                print("Login successful")
+            }
+        }
+    }
+    
+
     @IBOutlet weak var friendView: UIView!
     @IBOutlet weak var friendsCollectionView: UICollectionView!
     @IBOutlet weak var classTableView: UITableView!
@@ -62,6 +102,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         maskLayer.path = maskPath.cgPath
         self.downView.layer.mask = maskLayer
         // Do any additional setup loading the view, typically from a nib.
+        
+        //Launch Facebook Login
+        self.loginToFB()
     }
 
     override func didReceiveMemoryWarning() {
