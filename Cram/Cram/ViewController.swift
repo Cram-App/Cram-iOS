@@ -114,8 +114,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //Facebook Account Token
         let accessToken = FBSDKAccessToken.current()
         
-        if true{
-            //if accessToken == nil || userID == ""{
+        if accessToken == nil || userID == ""{
             
             if accessToken == nil{
                 let loginButton = FBSDKLoginButton()
@@ -155,13 +154,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 print("User Id", _facebookId)
                 
                 self.updateDBValues()
+                self.observeUserDB()
             }
             
             self.updateFriends()
             
         }
-        
-        self.updateFriends()
+        else{
+            self.updateFriends()
+            self.observeUserDB()
+        }
         
     }
     
@@ -389,6 +391,35 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         mainSubtitle.fadeIn()
         
     }
+    
+    func observeUserDB(){
+        if userID != ""{
+        ref.child("users").child(userID).observe(.value, with: {(snapshot) in
+            print("User Value Changed")
+            if( snapshot.value is NSNull){
+                print("No Internet")
+            }
+            else{
+                var data  = snapshot.value! as! [String: Any]
+                userPoints = data["points"] as! Int
+                
+                if data["pendingGames"] != nil{
+                    //Execute Pending Game
+                    //Popup Joining Section
+                    print("Invited For Game Session: ", data["pendingGames"] as! String )
+                }
+                
+            }
+        })
+        }
+    }
+    
+    func joinSession(){
+        
+    }
+    func denySession(){
+        
+    }
 }
 
 extension CGSize {
@@ -412,15 +443,6 @@ extension UIView {
     }
 }
 
-func observeUserDB(){
-    
-    ref.child("users").child("total").observe(.value, with: {(snapshot) in
-        print("value change", snapshot)
-        if( snapshot.value is NSNull){
-        }
-        else{
-            
-        }
-    })
-    
-}
+
+
+
