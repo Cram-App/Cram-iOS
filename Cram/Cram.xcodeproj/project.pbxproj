@@ -19,6 +19,7 @@
 		206882FD1FD3034F003290DE /* LiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882FC1FD3034F003290DE /* LiveVC.swift */; };
 		206882FF1FD30366003290DE /* LiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882FE1FD30366003290DE /* LiveCell.swift */; };
 		93DA7C5ED12BCE1110358A13 /* Pods_Cram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92D06D39795690E55A96494 /* Pods_Cram.framework */; };
+		AC09C3D51FD313ED004C5A86 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC09C3D41FD313ED004C5A86 /* GoogleService-Info.plist */; };
 		AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */; };
 		AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2D1FD2725500CA2275 /* ViewController.swift */; };
 		AC2C8C311FD2725500CA2275 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC2C8C2F1FD2725500CA2275 /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 		206882FC1FD3034F003290DE /* LiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveVC.swift; sourceTree = "<group>"; };
 		206882FE1FD30366003290DE /* LiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCell.swift; sourceTree = "<group>"; };
 		A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.release.xcconfig"; sourceTree = "<group>"; };
+		AC09C3D41FD313ED004C5A86 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC2C8C281FD2725500CA2275 /* Cram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC2C8C2D1FD2725500CA2275 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */,
 				AC2C8C2D1FD2725500CA2275 /* ViewController.swift */,
 				AC5AB2211FD2F405000A56FE /* Cram-Bridging-Header.h */,
+				AC09C3D41FD313ED004C5A86 /* GoogleService-Info.plist */,
 				AC2C8C2F1FD2725500CA2275 /* Main.storyboard */,
 				AC2C8C321FD2725500CA2275 /* Assets.xcassets */,
 				AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */,
@@ -312,6 +315,7 @@
 			files = (
 				206882EC1FD2BCF8003290DE /* Montserrat-Regular.ttf in Resources */,
 				206882E71FD2BCB3003290DE /* Montserrat-ExtraBold.ttf in Resources */,
+				AC09C3D51FD313ED004C5A86 /* GoogleService-Info.plist in Resources */,
 				AC2C8C361FD2725500CA2275 /* LaunchScreen.storyboard in Resources */,
 				AC2C8C331FD2725500CA2275 /* Assets.xcassets in Resources */,
 				206882EF1FD2BD18003290DE /* Poppins-Medium.ttf in Resources */,

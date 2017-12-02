@@ -16,95 +16,6 @@ import SDWebImage
 var friendsInGame = [String]()
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, FBSDKLoginButtonDelegate {
-    
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        
-        if error == nil {
-            
-            //profileImgVIew.image = UIImage(named: "face")
-            //personName.text = "Robert Hernandez"
-            
-        }
-        
-        return
-    }
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        
-        return
-    }
-    
-    func loginToFB(){
-        
-        //Facebook Account Token
-        let accessToken = FBSDKAccessToken.current()
-        
-        if accessToken == nil{
-            let loginButton = FBSDKLoginButton()
-            loginButton.delegate = self
-            loginButton.loginBehavior = FBSDKLoginBehavior.native
-            
-            FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self) { (result, err) in
-                if err != nil {
-                    print("Login failed")
-                }
-                print("Login successful")
-                
-                let accessToken = FBSDKAccessToken.current()
-//                guard let accessTokenString = accessToken?.tokenString else{
-//                    print("token to string error")
-//
-//                    return
-//                }
-                
-                //let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-                
-                FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture, location, age_range"]).start { (connection, result, err) in
-                    
-                     guard let data = result as? [String:Any] else { return }
-                    
-                    let _facebookName = data["name"] as! String
-                    let _facebookId = data["id"] as! String
-                    //let _facebookProfileUrl = "https://graph.facebook.com/\(_facebookId)/picture?type=large"
-                
-                    print("User Name", _facebookName)
-                    print("User Id", _facebookId)
-                }
-                
-                self.updateFriends()
-                
-                
-            }
-        }
-        
-        self.updateFriends()
-        
-    }
-    
-    func updateFriends(){
-        
-        FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "id"]).start { (connection, result, err) in
-            
-            guard let data = result as? [String:Any] else { return }
-            guard let dataArray = data["data"] as? NSArray else { return }
-            for users in dataArray{
-                guard var dataArrayValues = users as? [String:Any] else { return }
-                
-                if friendsInGame.contains(dataArrayValues["id"]! as! String) == false{
-                    friendsInGame.append(dataArrayValues["id"]! as! String)
-                }
-            }
-            
-            print("User Friends in Game", friendsInGame)
-            self.friendsCollectionView.reloadData()
-            self.saveFriends()
-        }
-        
-    }
-    
-    func saveFriends(){
-        UserDefaults.standard.setValue(friendsInGame, forKey: "friendsInGame")
-    }
 
     @IBOutlet weak var friendView: UIView!
     @IBOutlet weak var friendsCollectionView: UICollectionView!
@@ -174,6 +85,95 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+        if error == nil {
+            
+            //profileImgVIew.image = UIImage(named: "face")
+            //personName.text = "Robert Hernandez"
+            
+        }
+        
+        return
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        
+        return
+    }
+    
+    func loginToFB(){
+        
+        //Facebook Account Token
+        let accessToken = FBSDKAccessToken.current()
+        
+        if accessToken == nil{
+            let loginButton = FBSDKLoginButton()
+            loginButton.delegate = self
+            loginButton.loginBehavior = FBSDKLoginBehavior.native
+            
+            FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self) { (result, err) in
+                if err != nil {
+                    print("Login failed")
+                }
+                print("Login successful")
+                
+                let accessToken = FBSDKAccessToken.current()
+                //                guard let accessTokenString = accessToken?.tokenString else{
+                //                    print("token to string error")
+                //
+                //                    return
+                //                }
+                
+                //let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+                
+                FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture, location, age_range"]).start { (connection, result, err) in
+                    
+                    guard let data = result as? [String:Any] else { return }
+                    
+                    let _facebookName = data["name"] as! String
+                    let _facebookId = data["id"] as! String
+                    //let _facebookProfileUrl = "https://graph.facebook.com/\(_facebookId)/picture?type=large"
+                    
+                    print("User Name", _facebookName)
+                    print("User Id", _facebookId)
+                }
+                
+                self.updateFriends()
+                
+                
+            }
+        }
+        
+        self.updateFriends()
+        
+    }
+    
+    func updateFriends(){
+        
+        FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "id"]).start { (connection, result, err) in
+            
+            guard let data = result as? [String:Any] else { return }
+            guard let dataArray = data["data"] as? NSArray else { return }
+            for users in dataArray{
+                guard var dataArrayValues = users as? [String:Any] else { return }
+                
+                if friendsInGame.contains(dataArrayValues["id"]! as! String) == false{
+                    friendsInGame.append(dataArrayValues["id"]! as! String)
+                }
+            }
+            
+            print("User Friends in Game", friendsInGame)
+            self.friendsCollectionView.reloadData()
+            self.saveFriends()
+        }
+        
+    }
+    
+    func saveFriends(){
+        UserDefaults.standard.setValue(friendsInGame, forKey: "friendsInGame")
     }
     
     // Collection Views

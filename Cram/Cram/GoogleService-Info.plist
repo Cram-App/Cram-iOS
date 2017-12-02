@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>937655710788-ssuqajvh8rsuguen2lbgif8bhupul5a3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.937655710788-ssuqajvh8rsuguen2lbgif8bhupul5a3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD_wPu2xPm2iF8ZI2lwJmGOWRGF9Ed0LEo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>937655710788</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Cram.Cram</string>
+	<key>PROJECT_ID</key>
+	<string>cram-de85c</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cram-de85c.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:937655710788:ios:dd212d9016a92b3b</string>
+	<key>DATABASE_URL</key>
+	<string>https://cram-de85c.firebaseio.com</string>
+</dict>
+</plist>
