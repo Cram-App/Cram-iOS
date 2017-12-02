@@ -12,6 +12,9 @@
 		206882EC1FD2BCF8003290DE /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */; };
 		206882EF1FD2BD18003290DE /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882EE1FD2BD17003290DE /* Poppins-Medium.ttf */; };
 		206882F11FD2BD41003290DE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882F01FD2BD41003290DE /* Poppins-Regular.ttf */; };
+		206882F31FD2C68C003290DE /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F21FD2C68C003290DE /* FriendCell.swift */; };
+		206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F41FD2CBA0003290DE /* ClassCell.swift */; };
+		206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F61FD2E4DB003290DE /* TopicCell.swift */; };
 		AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */; };
 		AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2D1FD2725500CA2275 /* ViewController.swift */; };
 		AC2C8C311FD2725500CA2275 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC2C8C2F1FD2725500CA2275 /* Main.storyboard */; };
@@ -44,6 +47,9 @@
 		206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		206882EE1FD2BD17003290DE /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		206882F01FD2BD41003290DE /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		206882F21FD2C68C003290DE /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		206882F41FD2CBA0003290DE /* ClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
+		206882F61FD2E4DB003290DE /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		AC2C8C281FD2725500CA2275 /* Cram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC2C8C2D1FD2725500CA2275 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +132,9 @@
 				AC2C8C321FD2725500CA2275 /* Assets.xcassets */,
 				AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */,
 				AC2C8C371FD2725500CA2275 /* Info.plist */,
+				206882F21FD2C68C003290DE /* FriendCell.swift */,
+				206882F41FD2CBA0003290DE /* ClassCell.swift */,
+				206882F61FD2E4DB003290DE /* TopicCell.swift */,
 			);
 			path = Cram;
 			sourceTree = "<group>";
@@ -287,7 +296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */,
 				AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */,
+				206882F31FD2C68C003290DE /* FriendCell.swift in Sources */,
+				206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */,
 				AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +469,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DGU6V4MRZ4;
 				INFOPLIST_FILE = Cram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Cram.Cram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -472,6 +485,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DGU6V4MRZ4;
 				INFOPLIST_FILE = Cram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Cram.Cram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
