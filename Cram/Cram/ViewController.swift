@@ -125,6 +125,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var mainSubtitle: UILabel!
+    @IBOutlet weak var backArrowBtn: UIButton!
+    @IBOutlet weak var backArrowImg: UIImageView!
+    @IBOutlet weak var mainTitleLeading: NSLayoutConstraint!
     
     var friendLiveCount = 20
     var classCount = 20
@@ -133,6 +136,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var purple = UIColor(displayP3Red: 95/255, green: 49/255, blue: 146/255, alpha: 1.0)
     var green = UIColor(displayP3Red: 101/255, green: 195/255, blue: 163/255, alpha: 1.0)
     var lightThemeGrey = UIColor(displayP3Red: 184/255, green: 184/255, blue: 184/255, alpha: 1.0)
+    var veryLightGrey = UIColor(displayP3Red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,6 +149,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         topicsTableView.dataSource = self
         
         downView.isHidden = true
+        backArrowBtn.isHidden = true
+        backArrowImg.isHidden = true
         
         let maskPath: UIBezierPath = UIBezierPath(roundedRect: self.downView.bounds, byRoundingCorners: ([.bottomLeft, .bottomRight]), cornerRadii: CGSize(6, 6))
         let maskLayer: CAShapeLayer = CAShapeLayer()
@@ -244,6 +250,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! ClassCell
             
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor.clear
+            cell.selectedBackgroundView = backgroundView
+            
             cell.mainImg.image = UIImage(named: "class")
             
             return cell
@@ -254,31 +264,54 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.friendLineTrailing.constant = view.frame.size.width
-        self.friendViewTrailing.constant = view.frame.size.width
-        self.downViewTrailing.constant = view.frame.size.width + 15.0
-        self.classTableViewTrailing.constant = view.frame.size.width
+        print("CLICKED")
         
-        self.classTableViewLeading.constant = view.frame.size.width
-        self.friendLineLeading.constant = view.frame.size.width
-        self.friendViewLeading.constant = view.frame.size.width
-        
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-            self.friendLine.alpha = 0
-            self.friendView.alpha = 0
-            self.classTableView.alpha = 0
-            self.downView.alpha = 0
+        if tableView == classTableView {
+            
+            self.friendLineTrailing.constant = view.frame.size.width
+            self.friendViewTrailing.constant = view.frame.size.width
+            self.downViewTrailing.constant = view.frame.size.width + 15.0
+            self.classTableViewTrailing.constant = view.frame.size.width
+            
+            self.classTableViewLeading.constant = view.frame.size.width
+            self.friendLineLeading.constant = view.frame.size.width
+            self.friendViewLeading.constant = view.frame.size.width
+            
+            backArrowBtn.isHidden = false
+            backArrowImg.isHidden = false
+            
+            UIView.animate(withDuration: 0.5) {
+                
+                self.view.layoutIfNeeded()
+                self.friendLine.alpha = 0
+                self.friendView.alpha = 0
+                self.classTableView.alpha = 0
+                self.downView.alpha = 0
+                self.mainTitleLeading.constant = 35
+                
+            }
+            
+            mainTitle.fadeOut()
+            mainSubtitle.fadeOut()
+            mainTitle.text = "Topics"
+            mainSubtitle.text = "in Data Structures"
+            mainTitle.fadeIn()
+            mainSubtitle.fadeIn()
+            
+            print(indexPath.row)
+            tableView.deselectRow(at: indexPath, animated: false)
+            
         }
         
-        mainTitle.fadeOut()
-        mainSubtitle.fadeOut()
-        mainTitle.text = "Topics"
-        mainSubtitle.text = "in Data Structures"
-        mainTitle.fadeIn()
-        mainSubtitle.fadeIn()
+        if tableView == topicsTableView {
+            
+            self.performSegue(withIdentifier: "goLive", sender: nil)
+            
+            print(indexPath.row)
+            tableView.deselectRow(at: indexPath, animated: false)
+            
+        }
         
-        print(indexPath.row)
     }
     
     @IBAction func showFriendsClicked(_ sender: Any) {
@@ -304,7 +337,38 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     }
     
-
+    @IBAction func backBtnClicked(_ sender: Any) {
+        
+        self.friendLineTrailing.constant = 0
+        self.friendViewTrailing.constant = 0
+        self.downViewTrailing.constant = 15.0
+        self.classTableViewTrailing.constant = 0
+        
+        self.classTableViewLeading.constant = 0
+        self.friendLineLeading.constant = 0
+        self.friendViewLeading.constant = 0
+        
+        backArrowBtn.isHidden = true
+        backArrowImg.isHidden = true
+        
+        UIView.animate(withDuration: 0.5) {
+            
+            self.view.layoutIfNeeded()
+            self.friendLine.alpha = 1
+            self.friendView.alpha = 1
+            self.classTableView.alpha = 1
+            self.downView.alpha = 1
+            self.mainTitleLeading.constant = 15
+        }
+        
+        mainTitle.fadeOut()
+        mainSubtitle.fadeOut()
+        mainTitle.text = "Courses"
+        mainSubtitle.text = "in Yale Computer Science"
+        mainTitle.fadeIn()
+        mainSubtitle.fadeIn()
+        
+    }
 }
 
 extension CGSize {
