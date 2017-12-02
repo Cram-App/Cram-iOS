@@ -11,6 +11,9 @@ import GameKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
+import SDWebImage
+
+var friendsInGame = [String]()
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, FBSDKLoginButtonDelegate {
     
@@ -46,10 +49,62 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     print("Login failed")
                 }
                 print("Login successful")
+                
+                let accessToken = FBSDKAccessToken.current()
+//                guard let accessTokenString = accessToken?.tokenString else{
+//                    print("token to string error")
+//
+//                    return
+//                }
+                
+                //let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+                
+                FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture, location, age_range"]).start { (connection, result, err) in
+                    
+                     guard let data = result as? [String:Any] else { return }
+                    
+                    let _facebookName = data["name"] as! String
+                    let _facebookId = data["id"] as! String
+                    //let _facebookProfileUrl = "https://graph.facebook.com/\(_facebookId)/picture?type=large"
+                
+                    print("User Name", _facebookName)
+                    print("User Id", _facebookId)
+                }
+                
+                self.updateFriends()
+                
+                
             }
         }
+        
+        self.updateFriends()
+        
     }
     
+    func updateFriends(){
+        
+        FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "id"]).start { (connection, result, err) in
+            
+            guard let data = result as? [String:Any] else { return }
+            guard let dataArray = data["data"] as? NSArray else { return }
+            for users in dataArray{
+                guard var dataArrayValues = users as? [String:Any] else { return }
+                
+                if friendsInGame.contains(dataArrayValues["id"]! as! String) == false{
+                    friendsInGame.append(dataArrayValues["id"]! as! String)
+                }
+            }
+            
+            print("User Friends in Game", friendsInGame)
+            self.friendsCollectionView.reloadData()
+            self.saveFriends()
+        }
+        
+    }
+    
+    func saveFriends(){
+        UserDefaults.standard.setValue(friendsInGame, forKey: "friendsInGame")
+    }
 
     @IBOutlet weak var friendView: UIView!
     @IBOutlet weak var friendsCollectionView: UICollectionView!
@@ -98,8 +153,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.downView.layer.mask = maskLayer
         // Do any additional setup loading the view, typically from a nib.
         
+        if(UserDefaults.standard.value(forKey: "friendsInGame") != nil){
+            friendsInGame = (UserDefaults.standard.value(forKey: "friendsInGame") as! [String])
+        }
+        
         //Launch Facebook Login
         self.loginToFB()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //Update status
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,6 +179,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.status.layer.cornerRadius = cell.status.frame.size.width / 2
         cell.status.layer.masksToBounds = true
         
+        if indexPath.row < friendsInGame.count{
+            let picUrl = URL(string: "https://graph.facebook.com/\(friendsInGame[indexPath.row])/picture?type=large")
+            cell.friendImg.sd_setImage(with:  picUrl)
+        }
+        
         if indexPath.row < 4 {
             cell.status.backgroundColor = green
         } else {
@@ -128,7 +196,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return friendLiveCount
+        return friendsInGame.count
     }
     
     // Table Views
