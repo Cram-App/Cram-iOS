@@ -19,6 +19,7 @@
 		206882FB1FD2FB9A003290DE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882FA1FD2FB9A003290DE /* LoginVC.swift */; };
 		206882FD1FD3034F003290DE /* LiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882FC1FD3034F003290DE /* LiveVC.swift */; };
 		206882FF1FD30366003290DE /* LiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882FE1FD30366003290DE /* LiveCell.swift */; };
+		208D32721FD351820035B959 /* JoinedFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208D32711FD351820035B959 /* JoinedFriend.swift */; };
 		93DA7C5ED12BCE1110358A13 /* Pods_Cram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92D06D39795690E55A96494 /* Pods_Cram.framework */; };
 		AC09C3D51FD313ED004C5A86 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC09C3D41FD313ED004C5A86 /* GoogleService-Info.plist */; };
 		AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */; };
@@ -60,6 +61,7 @@
 		206882FA1FD2FB9A003290DE /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		206882FC1FD3034F003290DE /* LiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveVC.swift; sourceTree = "<group>"; };
 		206882FE1FD30366003290DE /* LiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCell.swift; sourceTree = "<group>"; };
+		208D32711FD351820035B959 /* JoinedFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedFriend.swift; sourceTree = "<group>"; };
 		A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.release.xcconfig"; sourceTree = "<group>"; };
 		AC09C3D41FD313ED004C5A86 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC2C8C281FD2725500CA2275 /* Cram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +127,7 @@
 				206882F61FD2E4DB003290DE /* TopicCell.swift */,
 				206882F21FD2C68C003290DE /* FriendCell.swift */,
 				206882FE1FD30366003290DE /* LiveCell.swift */,
+				208D32711FD351820035B959 /* JoinedFriend.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 			files = (
 				2038E83A1FD3347D00DB6621 /* KDCircularProgress.swift in Sources */,
 				206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */,
+				208D32721FD351820035B959 /* JoinedFriend.swift in Sources */,
 				206882FF1FD30366003290DE /* LiveCell.swift in Sources */,
 				AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */,
 				206882FB1FD2FB9A003290DE /* LoginVC.swift in Sources */,
