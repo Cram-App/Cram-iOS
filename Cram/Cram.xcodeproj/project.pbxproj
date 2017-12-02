@@ -15,7 +15,6 @@
 		206882F31FD2C68C003290DE /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F21FD2C68C003290DE /* FriendCell.swift */; };
 		206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F41FD2CBA0003290DE /* ClassCell.swift */; };
 		206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F61FD2E4DB003290DE /* TopicCell.swift */; };
-		206882F91FD2F117003290DE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F81FD2F117003290DE /* LoginVC.swift */; };
 		93DA7C5ED12BCE1110358A13 /* Pods_Cram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92D06D39795690E55A96494 /* Pods_Cram.framework */; };
 		AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */; };
 		AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2D1FD2725500CA2275 /* ViewController.swift */; };
@@ -52,7 +51,6 @@
 		206882F21FD2C68C003290DE /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		206882F41FD2CBA0003290DE /* ClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
 		206882F61FD2E4DB003290DE /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
-		206882F81FD2F117003290DE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.release.xcconfig"; sourceTree = "<group>"; };
 		AC2C8C281FD2725500CA2275 /* Cram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +65,7 @@
 		AC2C8C471FD2725500CA2275 /* CramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2C8C4B1FD2725500CA2275 /* CramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramUITests.swift; sourceTree = "<group>"; };
 		AC2C8C4D1FD2725500CA2275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC5AB2211FD2F405000A56FE /* Cram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cram-Bridging-Header.h"; sourceTree = "<group>"; };
 		B32009FEB20E5717E39E3FC6 /* Pods-Cram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.debug.xcconfig"; sourceTree = "<group>"; };
 		D92D06D39795690E55A96494 /* Pods_Cram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -137,6 +136,7 @@
 			children = (
 				AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */,
 				AC2C8C2D1FD2725500CA2275 /* ViewController.swift */,
+				AC5AB2211FD2F405000A56FE /* Cram-Bridging-Header.h */,
 				AC2C8C2F1FD2725500CA2275 /* Main.storyboard */,
 				AC2C8C321FD2725500CA2275 /* Assets.xcassets */,
 				AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */,
@@ -144,7 +144,6 @@
 				206882F21FD2C68C003290DE /* FriendCell.swift */,
 				206882F41FD2CBA0003290DE /* ClassCell.swift */,
 				206882F61FD2E4DB003290DE /* TopicCell.swift */,
-				206882F81FD2F117003290DE /* LoginVC.swift */,
 			);
 			path = Cram;
 			sourceTree = "<group>";
@@ -402,7 +401,6 @@
 			files = (
 				206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */,
 				AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */,
-				206882F91FD2F117003290DE /* LoginVC.swift in Sources */,
 				206882F31FD2C68C003290DE /* FriendCell.swift in Sources */,
 				206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */,
 				AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */,
