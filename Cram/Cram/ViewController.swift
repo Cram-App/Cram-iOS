@@ -153,6 +153,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 print("User Name", _facebookName)
                 print("User Id", _facebookId)
                 
+                self.saveProfile()
                 self.updateDBValues()
                 self.observeUserDB()
             }
@@ -190,6 +191,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func saveFriends(){
         UserDefaults.standard.setValue(friendsInGame, forKey: "friendsInGame")
+    }
+    
+    func saveProfile(){
+        UserDefaults.standard.setValue(userID, forKey: "userID")
+        UserDefaults.standard.setValue(userName, forKey: "userName")
+        UserDefaults.standard.setValue(userPoints, forKey: "userPoints")
     }
     
     func updateDBValues(){
@@ -402,12 +409,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             else{
                 var data  = snapshot.value! as! [String: Any]
                 userPoints = data["points"] as! Int
+                print("User Points", userPoints)
                 
                 if data["pendingGames"] != nil{
                     //Execute Pending Game
                     //Popup Joining Section
                     print("Invited For Game Session: ", data["pendingGames"] as! String )
                 }
+                
+                self.saveProfile()
                 
             }
         })
@@ -418,7 +428,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     func denySession(){
-        
+        if userID != ""{
+            print("Session Denied")
+            ref.child("users/\(userID)/pendingGames").removeValue()
+            //Close Popup
+        }
     }
 }
 
