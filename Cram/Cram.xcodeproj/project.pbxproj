@@ -1,708 +1,712 @@
 // !$*UTF8*$!
 {
-    archiveVersion = 1;
-    classes = {
-    };
-    objectVersion = 48;
-    objects = {
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
 
 /* Begin PBXBuildFile section */
-        93DA7C5ED12BCE1110358A13 /* Pods_Cram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92D06D39795690E55A96494 /* Pods_Cram.framework */; };
-        206882E51FD2BC9E003290DE /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882E41FD2BC9E003290DE /* Montserrat-Medium.ttf */; };
-        206882E71FD2BCB3003290DE /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882E61FD2BCB3003290DE /* Montserrat-ExtraBold.ttf */; };
-        206882EC1FD2BCF8003290DE /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */; };
-        206882EF1FD2BD18003290DE /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882EE1FD2BD17003290DE /* Poppins-Medium.ttf */; };
-        206882F11FD2BD41003290DE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882F01FD2BD41003290DE /* Poppins-Regular.ttf */; };
-        206882F31FD2C68C003290DE /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F21FD2C68C003290DE /* FriendCell.swift */; };
-        206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F41FD2CBA0003290DE /* ClassCell.swift */; };
-        206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F61FD2E4DB003290DE /* TopicCell.swift */; };
-        AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */; };
-        AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2D1FD2725500CA2275 /* ViewController.swift */; };
-        AC2C8C311FD2725500CA2275 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC2C8C2F1FD2725500CA2275 /* Main.storyboard */; };
-        AC2C8C331FD2725500CA2275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC2C8C321FD2725500CA2275 /* Assets.xcassets */; };
-        AC2C8C361FD2725500CA2275 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */; };
-        AC2C8C411FD2725500CA2275 /* CramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C401FD2725500CA2275 /* CramTests.swift */; };
-        AC2C8C4C1FD2725500CA2275 /* CramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C4B1FD2725500CA2275 /* CramUITests.swift */; };
+		206882E51FD2BC9E003290DE /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882E41FD2BC9E003290DE /* Montserrat-Medium.ttf */; };
+		206882E71FD2BCB3003290DE /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882E61FD2BCB3003290DE /* Montserrat-ExtraBold.ttf */; };
+		206882EC1FD2BCF8003290DE /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */; };
+		206882EF1FD2BD18003290DE /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882EE1FD2BD17003290DE /* Poppins-Medium.ttf */; };
+		206882F11FD2BD41003290DE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882F01FD2BD41003290DE /* Poppins-Regular.ttf */; };
+		206882F31FD2C68C003290DE /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F21FD2C68C003290DE /* FriendCell.swift */; };
+		206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F41FD2CBA0003290DE /* ClassCell.swift */; };
+		206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F61FD2E4DB003290DE /* TopicCell.swift */; };
+		206882F91FD2F117003290DE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F81FD2F117003290DE /* LoginVC.swift */; };
+		93DA7C5ED12BCE1110358A13 /* Pods_Cram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92D06D39795690E55A96494 /* Pods_Cram.framework */; };
+		AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */; };
+		AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2D1FD2725500CA2275 /* ViewController.swift */; };
+		AC2C8C311FD2725500CA2275 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC2C8C2F1FD2725500CA2275 /* Main.storyboard */; };
+		AC2C8C331FD2725500CA2275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC2C8C321FD2725500CA2275 /* Assets.xcassets */; };
+		AC2C8C361FD2725500CA2275 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */; };
+		AC2C8C411FD2725500CA2275 /* CramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C401FD2725500CA2275 /* CramTests.swift */; };
+		AC2C8C4C1FD2725500CA2275 /* CramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C4B1FD2725500CA2275 /* CramUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-        AC2C8C3D1FD2725500CA2275 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = AC2C8C201FD2725500CA2275 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = AC2C8C271FD2725500CA2275;
-            remoteInfo = Cram;
-        };
-        AC2C8C481FD2725500CA2275 /* PBXContainerItemProxy */ = {
-            isa = PBXContainerItemProxy;
-            containerPortal = AC2C8C201FD2725500CA2275 /* Project object */;
-            proxyType = 1;
-            remoteGlobalIDString = AC2C8C271FD2725500CA2275;
-            remoteInfo = Cram;
-        };
+		AC2C8C3D1FD2725500CA2275 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC2C8C201FD2725500CA2275 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC2C8C271FD2725500CA2275;
+			remoteInfo = Cram;
+		};
+		AC2C8C481FD2725500CA2275 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC2C8C201FD2725500CA2275 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC2C8C271FD2725500CA2275;
+			remoteInfo = Cram;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-        A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.release.xcconfig"; sourceTree = "<group>"; };
-        206882E41FD2BC9E003290DE /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
-        206882E61FD2BCB3003290DE /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
-        206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
-        206882EE1FD2BD17003290DE /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
-        206882F01FD2BD41003290DE /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
-        206882F21FD2C68C003290DE /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
-        206882F41FD2CBA0003290DE /* ClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
-        206882F61FD2E4DB003290DE /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
-        AC2C8C281FD2725500CA2275 /* Cram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cram.app; sourceTree = BUILT_PRODUCTS_DIR; };
-        AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-        AC2C8C2D1FD2725500CA2275 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-        AC2C8C301FD2725500CA2275 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-        AC2C8C321FD2725500CA2275 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-        AC2C8C351FD2725500CA2275 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-        AC2C8C371FD2725500CA2275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-        AC2C8C3C1FD2725500CA2275 /* CramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-        AC2C8C401FD2725500CA2275 /* CramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramTests.swift; sourceTree = "<group>"; };
-        AC2C8C421FD2725500CA2275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-        AC2C8C471FD2725500CA2275 /* CramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-        AC2C8C4B1FD2725500CA2275 /* CramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramUITests.swift; sourceTree = "<group>"; };
-        AC2C8C4D1FD2725500CA2275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-        B32009FEB20E5717E39E3FC6 /* Pods-Cram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.debug.xcconfig"; sourceTree = "<group>"; };
-        D92D06D39795690E55A96494 /* Pods_Cram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		206882E41FD2BC9E003290DE /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		206882E61FD2BCB3003290DE /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		206882EE1FD2BD17003290DE /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		206882F01FD2BD41003290DE /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		206882F21FD2C68C003290DE /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		206882F41FD2CBA0003290DE /* ClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
+		206882F61FD2E4DB003290DE /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
+		206882F81FD2F117003290DE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.release.xcconfig"; sourceTree = "<group>"; };
+		AC2C8C281FD2725500CA2275 /* Cram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AC2C8C2D1FD2725500CA2275 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AC2C8C301FD2725500CA2275 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AC2C8C321FD2725500CA2275 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC2C8C351FD2725500CA2275 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AC2C8C371FD2725500CA2275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC2C8C3C1FD2725500CA2275 /* CramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2C8C401FD2725500CA2275 /* CramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramTests.swift; sourceTree = "<group>"; };
+		AC2C8C421FD2725500CA2275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC2C8C471FD2725500CA2275 /* CramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC2C8C4B1FD2725500CA2275 /* CramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CramUITests.swift; sourceTree = "<group>"; };
+		AC2C8C4D1FD2725500CA2275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B32009FEB20E5717E39E3FC6 /* Pods-Cram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.debug.xcconfig"; sourceTree = "<group>"; };
+		D92D06D39795690E55A96494 /* Pods_Cram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-        AC2C8C251FD2725500CA2275 /* Frameworks */ = {
-            isa = PBXFrameworksBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-                93DA7C5ED12BCE1110358A13 /* Pods_Cram.framework in Frameworks */,
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        AC2C8C391FD2725500CA2275 /* Frameworks */ = {
-            isa = PBXFrameworksBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        AC2C8C441FD2725500CA2275 /* Frameworks */ = {
-            isa = PBXFrameworksBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
+		AC2C8C251FD2725500CA2275 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93DA7C5ED12BCE1110358A13 /* Pods_Cram.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C8C391FD2725500CA2275 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C8C441FD2725500CA2275 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-        206882E31FD2BC28003290DE /* Fonts */ = {
-            isa = PBXGroup;
-            children = (
-                206882F01FD2BD41003290DE /* Poppins-Regular.ttf */,
-                206882EE1FD2BD17003290DE /* Poppins-Medium.ttf */,
-                206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */,
-                206882E61FD2BCB3003290DE /* Montserrat-ExtraBold.ttf */,
-                206882E41FD2BC9E003290DE /* Montserrat-Medium.ttf */,
-            );
-            path = Fonts;
-            sourceTree = "<group>";
-        };
-        AC2C8C1F1FD2725500CA2275 = {
-            isa = PBXGroup;
-            children = (
-                206882E31FD2BC28003290DE /* Fonts */,
-                AC2C8C2A1FD2725500CA2275 /* Cram */,
-                AC2C8C3F1FD2725500CA2275 /* CramTests */,
-                AC2C8C4A1FD2725500CA2275 /* CramUITests */,
-                AC2C8C291FD2725500CA2275 /* Products */,
-                CE4A06515007164B8F5D8AAA /* Pods */,
-                DD514FE1138CB5C3B47EF3BE /* Frameworks */,
-            );
-            sourceTree = "<group>";
-        };
-        AC2C8C291FD2725500CA2275 /* Products */ = {
-            isa = PBXGroup;
-            children = (
-                AC2C8C281FD2725500CA2275 /* Cram.app */,
-                AC2C8C3C1FD2725500CA2275 /* CramTests.xctest */,
-                AC2C8C471FD2725500CA2275 /* CramUITests.xctest */,
-            );
-            name = Products;
-            sourceTree = "<group>";
-        };
-        AC2C8C2A1FD2725500CA2275 /* Cram */ = {
-            isa = PBXGroup;
-            children = (
-                AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */,
-                AC2C8C2D1FD2725500CA2275 /* ViewController.swift */,
-                AC2C8C2F1FD2725500CA2275 /* Main.storyboard */,
-                AC2C8C321FD2725500CA2275 /* Assets.xcassets */,
-                AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */,
-                AC2C8C371FD2725500CA2275 /* Info.plist */,
-                206882F21FD2C68C003290DE /* FriendCell.swift */,
-                206882F41FD2CBA0003290DE /* ClassCell.swift */,
-                206882F61FD2E4DB003290DE /* TopicCell.swift */,
-            );
-            path = Cram;
-            sourceTree = "<group>";
-        };
-        AC2C8C3F1FD2725500CA2275 /* CramTests */ = {
-            isa = PBXGroup;
-            children = (
-                AC2C8C401FD2725500CA2275 /* CramTests.swift */,
-                AC2C8C421FD2725500CA2275 /* Info.plist */,
-            );
-            path = CramTests;
-            sourceTree = "<group>";
-        };
-        AC2C8C4A1FD2725500CA2275 /* CramUITests */ = {
-            isa = PBXGroup;
-            children = (
-                AC2C8C4B1FD2725500CA2275 /* CramUITests.swift */,
-                AC2C8C4D1FD2725500CA2275 /* Info.plist */,
-            );
-            path = CramUITests;
-            sourceTree = "<group>";
-        };
-        CE4A06515007164B8F5D8AAA /* Pods */ = {
-            isa = PBXGroup;
-            children = (
-                B32009FEB20E5717E39E3FC6 /* Pods-Cram.debug.xcconfig */,
-                A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */,
-            );
-            name = Pods;
-            sourceTree = "<group>";
-        };
-        DD514FE1138CB5C3B47EF3BE /* Frameworks */ = {
-            isa = PBXGroup;
-            children = (
-                D92D06D39795690E55A96494 /* Pods_Cram.framework */,
-            );
-            name = Frameworks;
-            sourceTree = "<group>";
-        };
+		206882E31FD2BC28003290DE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				206882F01FD2BD41003290DE /* Poppins-Regular.ttf */,
+				206882EE1FD2BD17003290DE /* Poppins-Medium.ttf */,
+				206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */,
+				206882E61FD2BCB3003290DE /* Montserrat-ExtraBold.ttf */,
+				206882E41FD2BC9E003290DE /* Montserrat-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		AC2C8C1F1FD2725500CA2275 = {
+			isa = PBXGroup;
+			children = (
+				206882E31FD2BC28003290DE /* Fonts */,
+				AC2C8C2A1FD2725500CA2275 /* Cram */,
+				AC2C8C3F1FD2725500CA2275 /* CramTests */,
+				AC2C8C4A1FD2725500CA2275 /* CramUITests */,
+				AC2C8C291FD2725500CA2275 /* Products */,
+				CE4A06515007164B8F5D8AAA /* Pods */,
+				DD514FE1138CB5C3B47EF3BE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AC2C8C291FD2725500CA2275 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC2C8C281FD2725500CA2275 /* Cram.app */,
+				AC2C8C3C1FD2725500CA2275 /* CramTests.xctest */,
+				AC2C8C471FD2725500CA2275 /* CramUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC2C8C2A1FD2725500CA2275 /* Cram */ = {
+			isa = PBXGroup;
+			children = (
+				AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */,
+				AC2C8C2D1FD2725500CA2275 /* ViewController.swift */,
+				AC2C8C2F1FD2725500CA2275 /* Main.storyboard */,
+				AC2C8C321FD2725500CA2275 /* Assets.xcassets */,
+				AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */,
+				AC2C8C371FD2725500CA2275 /* Info.plist */,
+				206882F21FD2C68C003290DE /* FriendCell.swift */,
+				206882F41FD2CBA0003290DE /* ClassCell.swift */,
+				206882F61FD2E4DB003290DE /* TopicCell.swift */,
+				206882F81FD2F117003290DE /* LoginVC.swift */,
+			);
+			path = Cram;
+			sourceTree = "<group>";
+		};
+		AC2C8C3F1FD2725500CA2275 /* CramTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC2C8C401FD2725500CA2275 /* CramTests.swift */,
+				AC2C8C421FD2725500CA2275 /* Info.plist */,
+			);
+			path = CramTests;
+			sourceTree = "<group>";
+		};
+		AC2C8C4A1FD2725500CA2275 /* CramUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AC2C8C4B1FD2725500CA2275 /* CramUITests.swift */,
+				AC2C8C4D1FD2725500CA2275 /* Info.plist */,
+			);
+			path = CramUITests;
+			sourceTree = "<group>";
+		};
+		CE4A06515007164B8F5D8AAA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B32009FEB20E5717E39E3FC6 /* Pods-Cram.debug.xcconfig */,
+				A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DD514FE1138CB5C3B47EF3BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D92D06D39795690E55A96494 /* Pods_Cram.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-        AC2C8C271FD2725500CA2275 /* Cram */ = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = AC2C8C501FD2725500CA2275 /* Build configuration list for PBXNativeTarget "Cram" */;
-            buildPhases = (
-                4C89BF0E1816389378898AB2 /* [CP] Check Pods Manifest.lock */,
-                AC2C8C241FD2725500CA2275 /* Sources */,
-                AC2C8C251FD2725500CA2275 /* Frameworks */,
-                AC2C8C261FD2725500CA2275 /* Resources */,
-                03D6B7B174F6315D918209DC /* [CP] Embed Pods Frameworks */,
-                9C1B6D1BC9D05E3FF3C6F5EC /* [CP] Copy Pods Resources */,
-            );
-            buildRules = (
-            );
-            dependencies = (
-            );
-            name = Cram;
-            productName = Cram;
-            productReference = AC2C8C281FD2725500CA2275 /* Cram.app */;
-            productType = "com.apple.product-type.application";
-        };
-        AC2C8C3B1FD2725500CA2275 /* CramTests */ = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = AC2C8C531FD2725500CA2275 /* Build configuration list for PBXNativeTarget "CramTests" */;
-            buildPhases = (
-                AC2C8C381FD2725500CA2275 /* Sources */,
-                AC2C8C391FD2725500CA2275 /* Frameworks */,
-                AC2C8C3A1FD2725500CA2275 /* Resources */,
-            );
-            buildRules = (
-            );
-            dependencies = (
-                AC2C8C3E1FD2725500CA2275 /* PBXTargetDependency */,
-            );
-            name = CramTests;
-            productName = CramTests;
-            productReference = AC2C8C3C1FD2725500CA2275 /* CramTests.xctest */;
-            productType = "com.apple.product-type.bundle.unit-test";
-        };
-        AC2C8C461FD2725500CA2275 /* CramUITests */ = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = AC2C8C561FD2725500CA2275 /* Build configuration list for PBXNativeTarget "CramUITests" */;
-            buildPhases = (
-                AC2C8C431FD2725500CA2275 /* Sources */,
-                AC2C8C441FD2725500CA2275 /* Frameworks */,
-                AC2C8C451FD2725500CA2275 /* Resources */,
-            );
-            buildRules = (
-            );
-            dependencies = (
-                AC2C8C491FD2725500CA2275 /* PBXTargetDependency */,
-            );
-            name = CramUITests;
-            productName = CramUITests;
-            productReference = AC2C8C471FD2725500CA2275 /* CramUITests.xctest */;
-            productType = "com.apple.product-type.bundle.ui-testing";
-        };
+		AC2C8C271FD2725500CA2275 /* Cram */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC2C8C501FD2725500CA2275 /* Build configuration list for PBXNativeTarget "Cram" */;
+			buildPhases = (
+				4C89BF0E1816389378898AB2 /* [CP] Check Pods Manifest.lock */,
+				AC2C8C241FD2725500CA2275 /* Sources */,
+				AC2C8C251FD2725500CA2275 /* Frameworks */,
+				AC2C8C261FD2725500CA2275 /* Resources */,
+				03D6B7B174F6315D918209DC /* [CP] Embed Pods Frameworks */,
+				9C1B6D1BC9D05E3FF3C6F5EC /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cram;
+			productName = Cram;
+			productReference = AC2C8C281FD2725500CA2275 /* Cram.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AC2C8C3B1FD2725500CA2275 /* CramTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC2C8C531FD2725500CA2275 /* Build configuration list for PBXNativeTarget "CramTests" */;
+			buildPhases = (
+				AC2C8C381FD2725500CA2275 /* Sources */,
+				AC2C8C391FD2725500CA2275 /* Frameworks */,
+				AC2C8C3A1FD2725500CA2275 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC2C8C3E1FD2725500CA2275 /* PBXTargetDependency */,
+			);
+			name = CramTests;
+			productName = CramTests;
+			productReference = AC2C8C3C1FD2725500CA2275 /* CramTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AC2C8C461FD2725500CA2275 /* CramUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC2C8C561FD2725500CA2275 /* Build configuration list for PBXNativeTarget "CramUITests" */;
+			buildPhases = (
+				AC2C8C431FD2725500CA2275 /* Sources */,
+				AC2C8C441FD2725500CA2275 /* Frameworks */,
+				AC2C8C451FD2725500CA2275 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC2C8C491FD2725500CA2275 /* PBXTargetDependency */,
+			);
+			name = CramUITests;
+			productName = CramUITests;
+			productReference = AC2C8C471FD2725500CA2275 /* CramUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-        AC2C8C201FD2725500CA2275 /* Project object */ = {
-            isa = PBXProject;
-            attributes = {
-                LastSwiftUpdateCheck = 0910;
-                LastUpgradeCheck = 0910;
-                ORGANIZATIONNAME = Cram;
-                TargetAttributes = {
-                    AC2C8C271FD2725500CA2275 = {
-                        CreatedOnToolsVersion = 9.1;
-                        ProvisioningStyle = Automatic;
-                    };
-                    AC2C8C3B1FD2725500CA2275 = {
-                        CreatedOnToolsVersion = 9.1;
-                        ProvisioningStyle = Automatic;
-                        TestTargetID = AC2C8C271FD2725500CA2275;
-                    };
-                    AC2C8C461FD2725500CA2275 = {
-                        CreatedOnToolsVersion = 9.1;
-                        ProvisioningStyle = Automatic;
-                        TestTargetID = AC2C8C271FD2725500CA2275;
-                    };
-                };
-            };
-            buildConfigurationList = AC2C8C231FD2725500CA2275 /* Build configuration list for PBXProject "Cram" */;
-            compatibilityVersion = "Xcode 8.0";
-            developmentRegion = en;
-            hasScannedForEncodings = 0;
-            knownRegions = (
-                en,
-                Base,
-            );
-            mainGroup = AC2C8C1F1FD2725500CA2275;
-            productRefGroup = AC2C8C291FD2725500CA2275 /* Products */;
-            projectDirPath = "";
-            projectRoot = "";
-            targets = (
-                AC2C8C271FD2725500CA2275 /* Cram */,
-                AC2C8C3B1FD2725500CA2275 /* CramTests */,
-                AC2C8C461FD2725500CA2275 /* CramUITests */,
-            );
-        };
+		AC2C8C201FD2725500CA2275 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = Cram;
+				TargetAttributes = {
+					AC2C8C271FD2725500CA2275 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					AC2C8C3B1FD2725500CA2275 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AC2C8C271FD2725500CA2275;
+					};
+					AC2C8C461FD2725500CA2275 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AC2C8C271FD2725500CA2275;
+					};
+				};
+			};
+			buildConfigurationList = AC2C8C231FD2725500CA2275 /* Build configuration list for PBXProject "Cram" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AC2C8C1F1FD2725500CA2275;
+			productRefGroup = AC2C8C291FD2725500CA2275 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC2C8C271FD2725500CA2275 /* Cram */,
+				AC2C8C3B1FD2725500CA2275 /* CramTests */,
+				AC2C8C461FD2725500CA2275 /* CramUITests */,
+			);
+		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-        AC2C8C261FD2725500CA2275 /* Resources */ = {
-            isa = PBXResourcesBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-                206882EC1FD2BCF8003290DE /* Montserrat-Regular.ttf in Resources */,
-                206882E71FD2BCB3003290DE /* Montserrat-ExtraBold.ttf in Resources */,
-                AC2C8C361FD2725500CA2275 /* LaunchScreen.storyboard in Resources */,
-                AC2C8C331FD2725500CA2275 /* Assets.xcassets in Resources */,
-                206882EF1FD2BD18003290DE /* Poppins-Medium.ttf in Resources */,
-                206882E51FD2BC9E003290DE /* Montserrat-Medium.ttf in Resources */,
-                AC2C8C311FD2725500CA2275 /* Main.storyboard in Resources */,
-                206882F11FD2BD41003290DE /* Poppins-Regular.ttf in Resources */,
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        AC2C8C3A1FD2725500CA2275 /* Resources */ = {
-            isa = PBXResourcesBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        AC2C8C451FD2725500CA2275 /* Resources */ = {
-            isa = PBXResourcesBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
+		AC2C8C261FD2725500CA2275 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				206882EC1FD2BCF8003290DE /* Montserrat-Regular.ttf in Resources */,
+				206882E71FD2BCB3003290DE /* Montserrat-ExtraBold.ttf in Resources */,
+				AC2C8C361FD2725500CA2275 /* LaunchScreen.storyboard in Resources */,
+				AC2C8C331FD2725500CA2275 /* Assets.xcassets in Resources */,
+				206882EF1FD2BD18003290DE /* Poppins-Medium.ttf in Resources */,
+				206882E51FD2BC9E003290DE /* Montserrat-Medium.ttf in Resources */,
+				AC2C8C311FD2725500CA2275 /* Main.storyboard in Resources */,
+				206882F11FD2BD41003290DE /* Poppins-Regular.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C8C3A1FD2725500CA2275 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C8C451FD2725500CA2275 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-        03D6B7B174F6315D918209DC /* [CP] Embed Pods Frameworks */ = {
-            isa = PBXShellScriptBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            inputPaths = (
-                "${SRCROOT}/Pods/Target Support Files/Pods-Cram/Pods-Cram-frameworks.sh",
-                "${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-                "${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-                "${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-                "${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-                "${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-                "${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-                "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-                "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-                "${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-                "${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
-                "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-            );
-            name = "[CP] Embed Pods Frameworks";
-            outputPaths = (
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
-                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-            shellPath = /bin/sh;
-            shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cram/Pods-Cram-frameworks.sh\"\n";
-            showEnvVarsInLog = 0;
-        };
-        4C89BF0E1816389378898AB2 /* [CP] Check Pods Manifest.lock */ = {
-            isa = PBXShellScriptBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            inputPaths = (
-                "${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-                "${PODS_ROOT}/Manifest.lock",
-            );
-            name = "[CP] Check Pods Manifest.lock";
-            outputPaths = (
-                "$(DERIVED_FILE_DIR)/Pods-Cram-checkManifestLockResult.txt",
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-            shellPath = /bin/sh;
-            shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-            showEnvVarsInLog = 0;
-        };
-        9C1B6D1BC9D05E3FF3C6F5EC /* [CP] Copy Pods Resources */ = {
-            isa = PBXShellScriptBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-            );
-            inputPaths = (
-            );
-            name = "[CP] Copy Pods Resources";
-            outputPaths = (
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-            shellPath = /bin/sh;
-            shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cram/Pods-Cram-resources.sh\"\n";
-            showEnvVarsInLog = 0;
-        };
+		03D6B7B174F6315D918209DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Cram/Pods-Cram-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libwebp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cram/Pods-Cram-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C89BF0E1816389378898AB2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cram-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C1B6D1BC9D05E3FF3C6F5EC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cram/Pods-Cram-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-        AC2C8C241FD2725500CA2275 /* Sources */ = {
-            isa = PBXSourcesBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-                206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */,
-                AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */,
-                206882F31FD2C68C003290DE /* FriendCell.swift in Sources */,
-                206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */,
-                AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */,
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        AC2C8C381FD2725500CA2275 /* Sources */ = {
-            isa = PBXSourcesBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-                AC2C8C411FD2725500CA2275 /* CramTests.swift in Sources */,
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        AC2C8C431FD2725500CA2275 /* Sources */ = {
-            isa = PBXSourcesBuildPhase;
-            buildActionMask = 2147483647;
-            files = (
-                AC2C8C4C1FD2725500CA2275 /* CramUITests.swift in Sources */,
-            );
-            runOnlyForDeploymentPostprocessing = 0;
-        };
+		AC2C8C241FD2725500CA2275 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */,
+				AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */,
+				206882F91FD2F117003290DE /* LoginVC.swift in Sources */,
+				206882F31FD2C68C003290DE /* FriendCell.swift in Sources */,
+				206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */,
+				AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C8C381FD2725500CA2275 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC2C8C411FD2725500CA2275 /* CramTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC2C8C431FD2725500CA2275 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC2C8C4C1FD2725500CA2275 /* CramUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-        AC2C8C3E1FD2725500CA2275 /* PBXTargetDependency */ = {
-            isa = PBXTargetDependency;
-            target = AC2C8C271FD2725500CA2275 /* Cram */;
-            targetProxy = AC2C8C3D1FD2725500CA2275 /* PBXContainerItemProxy */;
-        };
-        AC2C8C491FD2725500CA2275 /* PBXTargetDependency */ = {
-            isa = PBXTargetDependency;
-            target = AC2C8C271FD2725500CA2275 /* Cram */;
-            targetProxy = AC2C8C481FD2725500CA2275 /* PBXContainerItemProxy */;
-        };
+		AC2C8C3E1FD2725500CA2275 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC2C8C271FD2725500CA2275 /* Cram */;
+			targetProxy = AC2C8C3D1FD2725500CA2275 /* PBXContainerItemProxy */;
+		};
+		AC2C8C491FD2725500CA2275 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC2C8C271FD2725500CA2275 /* Cram */;
+			targetProxy = AC2C8C481FD2725500CA2275 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-        AC2C8C2F1FD2725500CA2275 /* Main.storyboard */ = {
-            isa = PBXVariantGroup;
-            children = (
-                AC2C8C301FD2725500CA2275 /* Base */,
-            );
-            name = Main.storyboard;
-            sourceTree = "<group>";
-        };
-        AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */ = {
-            isa = PBXVariantGroup;
-            children = (
-                AC2C8C351FD2725500CA2275 /* Base */,
-            );
-            name = LaunchScreen.storyboard;
-            sourceTree = "<group>";
-        };
+		AC2C8C2F1FD2725500CA2275 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC2C8C301FD2725500CA2275 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AC2C8C351FD2725500CA2275 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-        AC2C8C4E1FD2725500CA2275 /* Debug */ = {
-            isa = XCBuildConfiguration;
-            buildSettings = {
-                ALWAYS_SEARCH_USER_PATHS = NO;
-                CLANG_ANALYZER_NONNULL = YES;
-                CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-                CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-                CLANG_CXX_LIBRARY = "libc++";
-                CLANG_ENABLE_MODULES = YES;
-                CLANG_ENABLE_OBJC_ARC = YES;
-                CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-                CLANG_WARN_BOOL_CONVERSION = YES;
-                CLANG_WARN_COMMA = YES;
-                CLANG_WARN_CONSTANT_CONVERSION = YES;
-                CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-                CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                CLANG_WARN_EMPTY_BODY = YES;
-                CLANG_WARN_ENUM_CONVERSION = YES;
-                CLANG_WARN_INFINITE_RECURSION = YES;
-                CLANG_WARN_INT_CONVERSION = YES;
-                CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-                CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-                CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-                CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-                CLANG_WARN_STRICT_PROTOTYPES = YES;
-                CLANG_WARN_SUSPICIOUS_MOVE = YES;
-                CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-                CLANG_WARN_UNREACHABLE_CODE = YES;
-                CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-                CODE_SIGN_IDENTITY = "iPhone Developer";
-                COPY_PHASE_STRIP = NO;
-                DEBUG_INFORMATION_FORMAT = dwarf;
-                ENABLE_STRICT_OBJC_MSGSEND = YES;
-                ENABLE_TESTABILITY = YES;
-                GCC_C_LANGUAGE_STANDARD = gnu11;
-                GCC_DYNAMIC_NO_PIC = NO;
-                GCC_NO_COMMON_BLOCKS = YES;
-                GCC_OPTIMIZATION_LEVEL = 0;
-                GCC_PREPROCESSOR_DEFINITIONS = (
-                    "DEBUG=1",
-                    "$(inherited)",
-                );
-                GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-                GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-                GCC_WARN_UNDECLARED_SELECTOR = YES;
-                GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-                GCC_WARN_UNUSED_FUNCTION = YES;
-                GCC_WARN_UNUSED_VARIABLE = YES;
-                IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-                MTL_ENABLE_DEBUG_INFO = YES;
-                ONLY_ACTIVE_ARCH = YES;
-                SDKROOT = iphoneos;
-                SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-                SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-            };
-            name = Debug;
-        };
-        AC2C8C4F1FD2725500CA2275 /* Release */ = {
-            isa = XCBuildConfiguration;
-            buildSettings = {
-                ALWAYS_SEARCH_USER_PATHS = NO;
-                CLANG_ANALYZER_NONNULL = YES;
-                CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-                CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-                CLANG_CXX_LIBRARY = "libc++";
-                CLANG_ENABLE_MODULES = YES;
-                CLANG_ENABLE_OBJC_ARC = YES;
-                CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-                CLANG_WARN_BOOL_CONVERSION = YES;
-                CLANG_WARN_COMMA = YES;
-                CLANG_WARN_CONSTANT_CONVERSION = YES;
-                CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-                CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-                CLANG_WARN_EMPTY_BODY = YES;
-                CLANG_WARN_ENUM_CONVERSION = YES;
-                CLANG_WARN_INFINITE_RECURSION = YES;
-                CLANG_WARN_INT_CONVERSION = YES;
-                CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-                CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-                CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-                CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-                CLANG_WARN_STRICT_PROTOTYPES = YES;
-                CLANG_WARN_SUSPICIOUS_MOVE = YES;
-                CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-                CLANG_WARN_UNREACHABLE_CODE = YES;
-                CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-                CODE_SIGN_IDENTITY = "iPhone Developer";
-                COPY_PHASE_STRIP = NO;
-                DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-                ENABLE_NS_ASSERTIONS = NO;
-                ENABLE_STRICT_OBJC_MSGSEND = YES;
-                GCC_C_LANGUAGE_STANDARD = gnu11;
-                GCC_NO_COMMON_BLOCKS = YES;
-                GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-                GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-                GCC_WARN_UNDECLARED_SELECTOR = YES;
-                GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-                GCC_WARN_UNUSED_FUNCTION = YES;
-                GCC_WARN_UNUSED_VARIABLE = YES;
-                IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-                MTL_ENABLE_DEBUG_INFO = NO;
-                SDKROOT = iphoneos;
-                SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-                VALIDATE_PRODUCT = YES;
-            };
-            name = Release;
-        };
-        AC2C8C511FD2725500CA2275 /* Debug */ = {
-            isa = XCBuildConfiguration;
-            baseConfigurationReference = B32009FEB20E5717E39E3FC6 /* Pods-Cram.debug.xcconfig */;
-            buildSettings = {
-                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-                CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = DGU6V4MRZ4;
-                INFOPLIST_FILE = Cram/Info.plist;
-                IPHONEOS_DEPLOYMENT_TARGET = 11;
-                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = Cram.Cram;
-                PRODUCT_NAME = "$(TARGET_NAME)";
-                SWIFT_VERSION = 4.0;
-                TARGETED_DEVICE_FAMILY = "1,2";
-            };
-            name = Debug;
-        };
-        AC2C8C521FD2725500CA2275 /* Release */ = {
-            isa = XCBuildConfiguration;
-            baseConfigurationReference = A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */;
-            buildSettings = {
-                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-                CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = DGU6V4MRZ4;
-                INFOPLIST_FILE = Cram/Info.plist;
-                IPHONEOS_DEPLOYMENT_TARGET = 11;
-                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = Cram.Cram;
-                PRODUCT_NAME = "$(TARGET_NAME)";
-                SWIFT_VERSION = 4.0;
-                TARGETED_DEVICE_FAMILY = "1,2";
-            };
-            name = Release;
-        };
-        AC2C8C541FD2725500CA2275 /* Debug */ = {
-            isa = XCBuildConfiguration;
-            buildSettings = {
-                ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-                BUNDLE_LOADER = "$(TEST_HOST)";
-                CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = DGU6V4MRZ4;
-                INFOPLIST_FILE = CramTests/Info.plist;
-                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = Cram.CramTests;
-                PRODUCT_NAME = "$(TARGET_NAME)";
-                SWIFT_VERSION = 4.0;
-                TARGETED_DEVICE_FAMILY = "1,2";
-                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cram.app/Cram";
-            };
-            name = Debug;
-        };
-        AC2C8C551FD2725500CA2275 /* Release */ = {
-            isa = XCBuildConfiguration;
-            buildSettings = {
-                ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-                BUNDLE_LOADER = "$(TEST_HOST)";
-                CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = DGU6V4MRZ4;
-                INFOPLIST_FILE = CramTests/Info.plist;
-                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = Cram.CramTests;
-                PRODUCT_NAME = "$(TARGET_NAME)";
-                SWIFT_VERSION = 4.0;
-                TARGETED_DEVICE_FAMILY = "1,2";
-                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cram.app/Cram";
-            };
-            name = Release;
-        };
-        AC2C8C571FD2725500CA2275 /* Debug */ = {
-            isa = XCBuildConfiguration;
-            buildSettings = {
-                ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-                CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = DGU6V4MRZ4;
-                INFOPLIST_FILE = CramUITests/Info.plist;
-                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = Cram.CramUITests;
-                PRODUCT_NAME = "$(TARGET_NAME)";
-                SWIFT_VERSION = 4.0;
-                TARGETED_DEVICE_FAMILY = "1,2";
-                TEST_TARGET_NAME = Cram;
-            };
-            name = Debug;
-        };
-        AC2C8C581FD2725500CA2275 /* Release */ = {
-            isa = XCBuildConfiguration;
-            buildSettings = {
-                ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-                CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = DGU6V4MRZ4;
-                INFOPLIST_FILE = CramUITests/Info.plist;
-                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = Cram.CramUITests;
-                PRODUCT_NAME = "$(TARGET_NAME)";
-                SWIFT_VERSION = 4.0;
-                TARGETED_DEVICE_FAMILY = "1,2";
-                TEST_TARGET_NAME = Cram;
-            };
-            name = Release;
-        };
+		AC2C8C4E1FD2725500CA2275 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AC2C8C4F1FD2725500CA2275 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AC2C8C511FD2725500CA2275 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B32009FEB20E5717E39E3FC6 /* Pods-Cram.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DGU6V4MRZ4;
+				INFOPLIST_FILE = Cram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Cram.Cram;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AC2C8C521FD2725500CA2275 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DGU6V4MRZ4;
+				INFOPLIST_FILE = Cram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Cram.Cram;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AC2C8C541FD2725500CA2275 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DGU6V4MRZ4;
+				INFOPLIST_FILE = CramTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Cram.CramTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cram.app/Cram";
+			};
+			name = Debug;
+		};
+		AC2C8C551FD2725500CA2275 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DGU6V4MRZ4;
+				INFOPLIST_FILE = CramTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Cram.CramTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cram.app/Cram";
+			};
+			name = Release;
+		};
+		AC2C8C571FD2725500CA2275 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DGU6V4MRZ4;
+				INFOPLIST_FILE = CramUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Cram.CramUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cram;
+			};
+			name = Debug;
+		};
+		AC2C8C581FD2725500CA2275 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DGU6V4MRZ4;
+				INFOPLIST_FILE = CramUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Cram.CramUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Cram;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-        AC2C8C231FD2725500CA2275 /* Build configuration list for PBXProject "Cram" */ = {
-            isa = XCConfigurationList;
-            buildConfigurations = (
-                AC2C8C4E1FD2725500CA2275 /* Debug */,
-                AC2C8C4F1FD2725500CA2275 /* Release */,
-            );
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Release;
-        };
-        AC2C8C501FD2725500CA2275 /* Build configuration list for PBXNativeTarget "Cram" */ = {
-            isa = XCConfigurationList;
-            buildConfigurations = (
-                AC2C8C511FD2725500CA2275 /* Debug */,
-                AC2C8C521FD2725500CA2275 /* Release */,
-            );
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Release;
-        };
-        AC2C8C531FD2725500CA2275 /* Build configuration list for PBXNativeTarget "CramTests" */ = {
-            isa = XCConfigurationList;
-            buildConfigurations = (
-                AC2C8C541FD2725500CA2275 /* Debug */,
-                AC2C8C551FD2725500CA2275 /* Release */,
-            );
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Release;
-        };
-        AC2C8C561FD2725500CA2275 /* Build configuration list for PBXNativeTarget "CramUITests" */ = {
-            isa = XCConfigurationList;
-            buildConfigurations = (
-                AC2C8C571FD2725500CA2275 /* Debug */,
-                AC2C8C581FD2725500CA2275 /* Release */,
-            );
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Release;
-        };
+		AC2C8C231FD2725500CA2275 /* Build configuration list for PBXProject "Cram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2C8C4E1FD2725500CA2275 /* Debug */,
+				AC2C8C4F1FD2725500CA2275 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC2C8C501FD2725500CA2275 /* Build configuration list for PBXNativeTarget "Cram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2C8C511FD2725500CA2275 /* Debug */,
+				AC2C8C521FD2725500CA2275 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC2C8C531FD2725500CA2275 /* Build configuration list for PBXNativeTarget "CramTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2C8C541FD2725500CA2275 /* Debug */,
+				AC2C8C551FD2725500CA2275 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC2C8C561FD2725500CA2275 /* Build configuration list for PBXNativeTarget "CramUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC2C8C571FD2725500CA2275 /* Debug */,
+				AC2C8C581FD2725500CA2275 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
-    };
-    rootObject = AC2C8C201FD2725500CA2275 /* Project object */;
+	};
+	rootObject = AC2C8C201FD2725500CA2275 /* Project object */;
 }
