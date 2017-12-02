@@ -10,8 +10,6 @@ import UIKit
 import FBSDKCoreKit
 import Firebase
 
-var ref: DatabaseReference!
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -26,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         FirebaseApp.configure()
-        ref = Database.database().reference()
         
         return true
     }
