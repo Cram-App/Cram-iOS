@@ -81,6 +81,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var purple = UIColor(displayP3Red: 95/255, green: 49/255, blue: 146/255, alpha: 1.0)
     var green = UIColor(displayP3Red: 101/255, green: 195/255, blue: 163/255, alpha: 1.0)
     var lightThemeGrey = UIColor(displayP3Red: 184/255, green: 184/255, blue: 184/255, alpha: 1.0)
+    var veryLightGrey = UIColor(displayP3Red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,11 +182,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! ClassCell
             
-            cell.mainImg.image = UIImage(named: "class")
-            
             let backgroundView = UIView()
             backgroundView.backgroundColor = UIColor.clear
             cell.selectedBackgroundView = backgroundView
+            
+            cell.mainImg.image = UIImage(named: "class")
             
             return cell
             
@@ -194,6 +195,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("CLICKED")
         
         if tableView == classTableView {
             
@@ -228,6 +231,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             mainSubtitle.fadeIn()
             
             print(indexPath.row)
+            tableView.deselectRow(at: indexPath, animated: false)
+            
+        }
+        
+        if tableView == topicsTableView {
+            
+            self.performSegue(withIdentifier: "goLive", sender: nil)
+            
+            print(indexPath.row)
+            tableView.deselectRow(at: indexPath, animated: false)
             
         }
         

@@ -16,6 +16,8 @@
 		206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F41FD2CBA0003290DE /* ClassCell.swift */; };
 		206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882F61FD2E4DB003290DE /* TopicCell.swift */; };
 		206882FB1FD2FB9A003290DE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882FA1FD2FB9A003290DE /* LoginVC.swift */; };
+		206882FD1FD3034F003290DE /* LiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882FC1FD3034F003290DE /* LiveVC.swift */; };
+		206882FF1FD30366003290DE /* LiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206882FE1FD30366003290DE /* LiveCell.swift */; };
 		93DA7C5ED12BCE1110358A13 /* Pods_Cram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92D06D39795690E55A96494 /* Pods_Cram.framework */; };
 		AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */; };
 		AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2C8C2D1FD2725500CA2275 /* ViewController.swift */; };
@@ -53,6 +55,8 @@
 		206882F41FD2CBA0003290DE /* ClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
 		206882F61FD2E4DB003290DE /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		206882FA1FD2FB9A003290DE /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		206882FC1FD3034F003290DE /* LiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveVC.swift; sourceTree = "<group>"; };
+		206882FE1FD30366003290DE /* LiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCell.swift; sourceTree = "<group>"; };
 		A14F68EDC051AAAE88EE6C86 /* Pods-Cram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cram/Pods-Cram.release.xcconfig"; sourceTree = "<group>"; };
 		AC2C8C281FD2725500CA2275 /* Cram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,17 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		206883001FD303DC003290DE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				206882F41FD2CBA0003290DE /* ClassCell.swift */,
+				206882F61FD2E4DB003290DE /* TopicCell.swift */,
+				206882F21FD2C68C003290DE /* FriendCell.swift */,
+				206882FE1FD30366003290DE /* LiveCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		AC2C8C1F1FD2725500CA2275 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +151,7 @@
 		AC2C8C2A1FD2725500CA2275 /* Cram */ = {
 			isa = PBXGroup;
 			children = (
+				206883001FD303DC003290DE /* Cells */,
 				206882FA1FD2FB9A003290DE /* LoginVC.swift */,
 				AC2C8C2B1FD2725500CA2275 /* AppDelegate.swift */,
 				AC2C8C2D1FD2725500CA2275 /* ViewController.swift */,
@@ -144,9 +160,7 @@
 				AC2C8C321FD2725500CA2275 /* Assets.xcassets */,
 				AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */,
 				AC2C8C371FD2725500CA2275 /* Info.plist */,
-				206882F21FD2C68C003290DE /* FriendCell.swift */,
-				206882F41FD2CBA0003290DE /* ClassCell.swift */,
-				206882F61FD2E4DB003290DE /* TopicCell.swift */,
+				206882FC1FD3034F003290DE /* LiveVC.swift */,
 			);
 			path = Cram;
 			sourceTree = "<group>";
@@ -403,8 +417,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */,
+				206882FF1FD30366003290DE /* LiveCell.swift in Sources */,
 				AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */,
 				206882FB1FD2FB9A003290DE /* LoginVC.swift in Sources */,
+				206882FD1FD3034F003290DE /* LiveVC.swift in Sources */,
 				206882F31FD2C68C003290DE /* FriendCell.swift in Sources */,
 				206882F71FD2E4DB003290DE /* TopicCell.swift in Sources */,
 				AC2C8C2C1FD2725500CA2275 /* AppDelegate.swift in Sources */,
