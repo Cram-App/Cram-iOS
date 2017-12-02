@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var liveCollectionView: UICollectionView!
     @IBOutlet weak var pullTab: UIView!
@@ -30,8 +30,14 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var questionText: UILabel!
     @IBOutlet weak var timer: KDCircularProgress!
     
+    @IBOutlet weak var waitingRoomTableView: UITableView!
+    @IBOutlet weak var waitingMessage: UILabel!
+    @IBOutlet weak var waitingBtnBack: UIView!
+    @IBOutlet weak var waitingRoomBackView: UIView!
+    
     var totalSecondsCountDown = 10.0
     var gameTimer: Timer!
+    var friendGameCount = 1
     
     var friendLiveCount = 10
     let questions =
@@ -41,12 +47,28 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         "This is a question that was generated automatically from a course video lecture! THREE",
         "This is a question that was generated automatically from a course video lecture! FOUR"
     ]
+    var friendsInGame =
+    [
+        "You"
+    ]
+    var friendsInGamePics =
+    [
+        "testface"
+    ]
+    var friendsInGamePoints =
+    [
+        125
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        waitingRoomBackView.isHidden = false
+        
         liveCollectionView.dataSource = self
         liveCollectionView.delegate = self
+        waitingRoomTableView.dataSource = self
+        waitingRoomTableView.delegate = self
         
         pullTab.layer.cornerRadius = pullTab.frame.size.height / 2
         questionBack.layer.cornerRadius = 6
@@ -59,7 +81,19 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         timerBack.layer.masksToBounds = true
         
         timer.angle = 360
-        self.inGame(index: 0)
+        waitingBtnBack.layer.cornerRadius = waitingBtnBack.frame.size.height / 2
+        waitingBtnBack.layer.masksToBounds = true
+        
+        let headerHeight: CGFloat =  CGFloat(Int(waitingRoomTableView.rowHeight) * waitingRoomTableView.numberOfRows(inSection: 0)) / 2
+        waitingRoomTableView.contentInset = UIEdgeInsetsMake(headerHeight, 0, -headerHeight, 0)
+        
+        // DEMO ADDING A PERSON
+        let when = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            // THIS CRASHES
+            self.addFriend(name: "Brian", pic: "testface", points: 34)
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -77,6 +111,21 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         btnBack4.layer.cornerRadius = btnBack1.frame.size.height / 2
         
         //questionText.alpha = 0.0
+    }
+    
+    func addFriend(name: String, pic: String, points: Int) {
+        
+        waitingRoomTableView.beginUpdates()
+        
+        let indexPath = IndexPath(row: friendsInGame.count, section: 0)
+        waitingRoomTableView.insertRows(at: [indexPath], with: .bottom)
+        
+        friendsInGame.append(name)
+        friendsInGamePics.append(pic)
+        friendsInGamePoints.append(points)
+        
+        waitingRoomTableView.endUpdates()
+        
     }
     
     // Live Collection View
@@ -106,6 +155,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if index == questions.count {
             return
         }
+        
         //Fade In
         self.questionText.fadeIn()
         self.questionCountText.fadeIn()
@@ -132,25 +182,36 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             self.btnText3.fadeOut()
             self.btnText4.fadeOut()
             
-            
             self.inGame(index: index + 1)
             
         }
         
     }
     
+    @IBAction func startGameBtnClicked(_ sender: Any) {
+        
+        // Starts game
+        waitingRoomBackView.isHidden = true
+        self.inGame(index: 0)
+    }
+
+    @IBAction func cancelGameBtnClicked(_ sender: Any) {
+        // Do Stuff
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @objc func updateTimer() {
         
         if self.totalSecondsCountDown > 0 {
             self.totalSecondsCountDown = self.totalSecondsCountDown - 1
-            print("timer countdown : \(self.totalSecondsCountDown) + \(timer.angle)")
+            print("Timer countdown: \(self.totalSecondsCountDown) + \(timer.angle)")
             
             //timer.angle = 360.0 * (10.0 / Double(totalSecondsCountDown))
             timer.animate(fromAngle: timer.angle, toAngle: 360.0 * (Double(totalSecondsCountDown) / 10.0), duration: 1, completion: nil)
             
         } else {
             self.stopCountDownTimer();
-            print("timer stops ...")
+            print("Timer stops...")
             
         }
         
@@ -176,6 +237,30 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             self.gameTimer.invalidate()
             self.gameTimer = nil
         }
+        
+    }
+    
+    // Table view
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "joinedFriend", for: indexPath) as! JoinedFriend
+        cell.backgroundColor = UIColor.white
+        cell.friendName.text = "\(friendsInGame[indexPath.row]) joined!"
+        cell.friendImg.image = UIImage(named: friendsInGamePics[indexPath.row])
+        cell.friendPoints.text = "\(friendsInGamePoints[indexPath.row])"
+        
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return friendsInGame.count
         
     }
 
