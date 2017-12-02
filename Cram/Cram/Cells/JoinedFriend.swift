@@ -11,8 +11,8 @@ import UIKit
 class JoinedFriend: UITableViewCell {
 
     @IBOutlet weak var friendImg: UIImageView!
-    @IBOutlet weak var friendName: NSLayoutConstraint!
-    @IBOutlet weak var friendPoints: NSLayoutConstraint!
+    @IBOutlet weak var friendName: UILabel!
+    @IBOutlet weak var friendPoints: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

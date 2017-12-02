@@ -92,7 +92,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             // THIS CRASHES
-            //self.addFriend(name: "Brian", pic: "sample2", points: 34)
+            self.addFriend(name: "Brian", pic: "testface", points: 34)
         }
 
         // Do any additional setup after loading the view.
@@ -115,14 +115,14 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func addFriend(name: String, pic: String, points: Int) {
         
-        friendsInGame.append(name)
-        friendsInGamePics.append(pic)
-        friendsInGamePoints.append(points)
-        
         waitingRoomTableView.beginUpdates()
         
         let indexPath = IndexPath(row: friendsInGame.count, section: 0)
         waitingRoomTableView.insertRows(at: [indexPath], with: .bottom)
+        
+        friendsInGame.append(name)
+        friendsInGamePics.append(pic)
+        friendsInGamePoints.append(points)
         
         waitingRoomTableView.endUpdates()
         
@@ -245,8 +245,9 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "joinedFriend", for: indexPath) as! JoinedFriend
         cell.backgroundColor = UIColor.white
-        cell.contentView.layer.cornerRadius = 6
-        cell.contentView.layer.masksToBounds = true
+        cell.friendName.text = "\(friendsInGame[indexPath.row]) joined!"
+        cell.friendImg.image = UIImage(named: friendsInGamePics[indexPath.row])
+        cell.friendPoints.text = "\(friendsInGamePoints[indexPath.row])"
         
         return cell
         

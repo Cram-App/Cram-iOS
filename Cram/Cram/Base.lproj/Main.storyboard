@@ -927,8 +927,8 @@
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <outlet property="friendImg" destination="EMW-np-CSY" id="iyq-9m-Q3W"/>
-                                                    <outlet property="friendName" destination="MLi-zI-by0" id="TAJ-o3-htb"/>
-                                                    <outlet property="friendPoints" destination="nYC-IZ-Zpx" id="xHp-tY-uyh"/>
+                                                    <outlet property="friendName" destination="Bda-EJ-GQe" id="efw-iC-Tux"/>
+                                                    <outlet property="friendPoints" destination="1qU-nk-oOm" id="xpb-bH-3Oq"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
