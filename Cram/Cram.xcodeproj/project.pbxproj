@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2038E83A1FD3347D00DB6621 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2038E8391FD3347D00DB6621 /* KDCircularProgress.swift */; };
 		206882E51FD2BC9E003290DE /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882E41FD2BC9E003290DE /* Montserrat-Medium.ttf */; };
 		206882E71FD2BCB3003290DE /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882E61FD2BCB3003290DE /* Montserrat-ExtraBold.ttf */; };
 		206882EC1FD2BCF8003290DE /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2038E8391FD3347D00DB6621 /* KDCircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		206882E41FD2BC9E003290DE /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		206882E61FD2BCB3003290DE /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		206882EA1FD2BCF8003290DE /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				AC2C8C341FD2725500CA2275 /* LaunchScreen.storyboard */,
 				AC2C8C371FD2725500CA2275 /* Info.plist */,
 				206882FC1FD3034F003290DE /* LiveVC.swift */,
+				2038E8391FD3347D00DB6621 /* KDCircularProgress.swift */,
 			);
 			path = Cram;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2038E83A1FD3347D00DB6621 /* KDCircularProgress.swift in Sources */,
 				206882F51FD2CBA0003290DE /* ClassCell.swift in Sources */,
 				206882FF1FD30366003290DE /* LiveCell.swift in Sources */,
 				AC2C8C2E1FD2725500CA2275 /* ViewController.swift in Sources */,
