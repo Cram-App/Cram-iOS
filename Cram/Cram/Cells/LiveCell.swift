@@ -13,5 +13,7 @@ class LiveCell: UICollectionViewCell {
     @IBOutlet weak var cellBack: UIView!
     @IBOutlet weak var cellImg: UIImageView!
     @IBOutlet weak var cellName: UILabel!
+    @IBOutlet weak var pointsBack: UIView!
+    @IBOutlet weak var points: UILabel!
     
 }
