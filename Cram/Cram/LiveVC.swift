@@ -40,7 +40,6 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         "This is a question that was generated automatically from a course video lecture! TWO",
         "This is a question that was generated automatically from a course video lecture! THREE",
         "This is a question that was generated automatically from a course video lecture! FOUR"
-    
     ]
     
     override func viewDidLoad() {
@@ -60,7 +59,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         timerBack.layer.masksToBounds = true
         
         timer.angle = 360
-        inGame(index: 0)
+        self.inGame(index: 0)
 
         // Do any additional setup after loading the view.
     }
@@ -107,21 +106,34 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if index == questions.count {
             return
         }
+        //Fade In
+        self.questionText.fadeIn()
+        self.questionCountText.fadeIn()
+        self.btnText1.fadeIn()
+        self.btnText2.fadeIn()
+        self.btnText3.fadeIn()
+        self.btnText4.fadeIn()
         
         questionCountText.text = "\(index + 1)/\(questions.count)"
-        
-        //self.questionText.fadeIn()
-        
         questionText.text = questions[index]
         startCountDownTimer()
         
-        let when = DispatchTime.now() + 10
+        let when = DispatchTime.now() + 15
         DispatchQueue.main.asyncAfter(deadline: when) {
             
-            self.timer.animate(fromAngle: self.timer.angle, toAngle: 360.0, duration: 1.0, completion: nil)
-            self.totalSecondsCountDown = 10.0
+            self.timer.animate(fromAngle: self.timer.angle, toAngle: 0.0, duration: 1.0, completion: nil)
+            self.totalSecondsCountDown = 10.0 + 1.0
+            
+            //Fadeout
+            self.questionText.fadeOut()
+            self.questionCountText.fadeOut()
+            self.btnText1.fadeOut()
+            self.btnText2.fadeOut()
+            self.btnText3.fadeOut()
+            self.btnText4.fadeOut()
+            
+            
             self.inGame(index: index + 1)
-            //self.questionText.fadeOut()
             
         }
         
