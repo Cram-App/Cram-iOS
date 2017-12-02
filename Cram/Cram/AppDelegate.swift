@@ -10,9 +10,11 @@ import UIKit
 import FBSDKCoreKit
 import Firebase
 
+var ref: DatabaseReference!
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     
@@ -24,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         FirebaseApp.configure()
+        ref = Database.database().reference()
         
         return true
     }
@@ -59,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             annotation: annotation
         )
     }
-
-
+    
+    
 }
 

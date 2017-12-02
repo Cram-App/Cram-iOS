@@ -12,11 +12,16 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
 import SDWebImage
+import Firebase
 
 var friendsInGame = [String]()
+var userID = String()
+var userName = String()
+var userPoints = 0
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, FBSDKLoginButtonDelegate {
-
+    //@IBOutlet weak var userPointsLabel: UILabel!
+    
     @IBOutlet weak var friendView: UIView!
     @IBOutlet weak var friendsCollectionView: UICollectionView!
     @IBOutlet weak var classTableView: UITableView!
@@ -48,7 +53,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var green = UIColor(displayP3Red: 101/255, green: 195/255, blue: 163/255, alpha: 1.0)
     var lightThemeGrey = UIColor(displayP3Red: 184/255, green: 184/255, blue: 184/255, alpha: 1.0)
     var veryLightGrey = UIColor(displayP3Red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,7 +86,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewWillAppear(_ animated: Bool) {
         //Update status
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -109,42 +114,51 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //Facebook Account Token
         let accessToken = FBSDKAccessToken.current()
         
-        if accessToken == nil{
-            let loginButton = FBSDKLoginButton()
-            loginButton.delegate = self
-            loginButton.loginBehavior = FBSDKLoginBehavior.native
+        if true{
+            //if accessToken == nil || userID == ""{
             
-            FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self) { (result, err) in
-                if err != nil {
-                    print("Login failed")
+            if accessToken == nil{
+                let loginButton = FBSDKLoginButton()
+                loginButton.delegate = self
+                loginButton.loginBehavior = FBSDKLoginBehavior.native
+                
+                FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self) { (result, err) in
+                    if err != nil {
+                        print("Login failed")
+                    }
+                    print("Login successful")
+                    
+                    let accessToken = FBSDKAccessToken.current()
+                    //                guard let accessTokenString = accessToken?.tokenString else{
+                    //                    print("token to string error")
+                    //
+                    //                    return
+                    //                }
+                    
+                    //let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
                 }
-                print("Login successful")
-                
-                let accessToken = FBSDKAccessToken.current()
-                //                guard let accessTokenString = accessToken?.tokenString else{
-                //                    print("token to string error")
-                //
-                //                    return
-                //                }
-                
-                //let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-                
-                FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture, location, age_range"]).start { (connection, result, err) in
-                    
-                    guard let data = result as? [String:Any] else { return }
-                    
-                    let _facebookName = data["name"] as! String
-                    let _facebookId = data["id"] as! String
-                    //let _facebookProfileUrl = "https://graph.facebook.com/\(_facebookId)/picture?type=large"
-                    
-                    print("User Name", _facebookName)
-                    print("User Id", _facebookId)
-                }
-                
-                self.updateFriends()
-                
-                
             }
+            
+            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, picture, location, age_range"]).start { (connection, result, err) in
+                
+                guard let data = result as? [String:Any] else { return }
+                
+                let _facebookName = data["name"] as! String
+                print("Facebook Name", _facebookName)
+                let _facebookId = data["id"] as! String
+                //let _facebookProfileUrl = "https://graph.facebook.com/\(_facebookId)/picture?type=large"
+                
+                
+                userID = _facebookId
+                userName = _facebookName
+                print("User Name", _facebookName)
+                print("User Id", _facebookId)
+                
+                self.updateDBValues()
+            }
+            
+            self.updateFriends()
+            
         }
         
         self.updateFriends()
@@ -174,6 +188,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func saveFriends(){
         UserDefaults.standard.setValue(friendsInGame, forKey: "friendsInGame")
+    }
+    
+    func updateDBValues(){
+        ref.child("users/\(userID)/name").setValue(userName)
+        ref.child("users/\(userID)/points").setValue(userPoints)
+        ref.child("users/\(userID)/friendsInGame").setValue(friendsInGame)
     }
     
     // Collection Views
@@ -334,7 +354,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
-
+        
     }
     
     @IBAction func backBtnClicked(_ sender: Any) {
@@ -392,3 +412,15 @@ extension UIView {
     }
 }
 
+func observeUserDB(){
+    
+    ref.child("users").child("total").observe(.value, with: {(snapshot) in
+        print("value change", snapshot)
+        if( snapshot.value is NSNull){
+        }
+        else{
+            
+        }
+    })
+    
+}
