@@ -295,6 +295,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         print("CLICKED")
         
+        self.createGame()
+        
         if tableView == classTableView {
             
             self.friendLineTrailing.constant = view.frame.size.width
@@ -424,9 +426,54 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
-    func joinSession(){
+    //Creates Game Session
+    func createGame(){
+        let gameRef = ref.child("currentGames").childByAutoId()
+        gameRef.child("leadboard/\(userID)/name").setValue(userName)
+        gameRef.child("leadboard/\(userID)/totalPoints").setValue(userPoints)
+        gameRef.child("leadboard/\(userID)/gamePoints").setValue(0)
         
+        for friend in friendsInGame{
+            if friend != userID{
+                ref.child("users/\(friend)/pendingGames").setValue(gameRef.key)
+            }
+        }
+        
+        self.followGame(gameRef: gameRef)
     }
+    
+    //Observes Game Changes (HOST)
+    func followGame(gameRef: DatabaseReference){
+        gameRef.observe(.value, with: {(snapshot) in
+            
+            if( snapshot.value is NSNull){
+                print("Invalid of expired game")
+            }
+            
+        })
+    }
+    
+    //Observes Game Changes (INVITED)
+    func followGame(gameKey: String){
+        ref.child("currentGames").child(gameKey).observe(.value, with: {(snapshot) in
+            
+            if( snapshot.value is NSNull){
+                print("Invalid of expired game")
+            }
+            self.joinSession(gameKey: gameKey)
+            
+        })
+    }
+    
+    //Joins game if possible
+    func joinSession(gameKey: String){
+        
+        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/name").setValue(userName)
+        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/totalPoints").setValue(userPoints)
+        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/gamePoints").setValue(0)
+
+    }
+    
     func denySession(){
         if userID != ""{
             print("Session Denied")
