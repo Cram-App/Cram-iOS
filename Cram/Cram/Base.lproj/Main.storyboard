@@ -114,7 +114,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWc-V6-cqd">
-                                                    <rect key="frame" x="306" y="20" width="29" height="20"/>
+                                                    <rect key="frame" x="306" y="20.5" width="29" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="29" id="dpu-uf-xvW"/>
                                                     </constraints>
@@ -179,7 +179,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="friendCell" reuseIdentifier="friendCell" id="yhQ-vL-jgV" customClass="FriendCell" customModule="Cram" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="5" width="38" height="38"/>
+                                                <rect key="frame" x="15" y="6.5" width="38" height="38"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
@@ -495,16 +495,91 @@
                         <outlet property="friendViewLeading" destination="Mmv-Op-dn5" id="wc5-u5-c59"/>
                         <outlet property="friendViewTrailing" destination="gqw-BJ-Vcd" id="JPH-g2-VB2"/>
                         <outlet property="friendsCollectionView" destination="ZKy-o6-fXt" id="S3I-gj-nOi"/>
+                        <outlet property="mainSubtitle" destination="4gk-mG-YUw" id="eCj-Gr-aiQ"/>
+                        <outlet property="mainTitle" destination="70y-PJ-p3J" id="DgC-NR-kJQ"/>
                         <outlet property="topicsTableView" destination="Pio-Em-Kkw" id="dxM-cR-k2c"/>
+                        <segue destination="nNu-R4-Jhk" kind="showDetail" identifier="goLogin" id="3Uy-oD-bNN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
+        <!--LoginVC-->
+        <scene sceneID="2VT-T0-67n">
+            <objects>
+                <viewController id="nNu-R4-Jhk" customClass="LoginVC" customModule="Cram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bOD-L2-jfw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cramlogo" translatesAutoresizingMaskIntoConstraints="NO" id="XBg-RC-TKm">
+                                <rect key="frame" x="80" y="153.5" width="215" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="NHm-CI-Jvi"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wm7-97-ENa">
+                                <rect key="frame" x="40" y="254" width="295" height="78.5"/>
+                                <string key="text">Cram lets you automatically convert boring lectures into fun quizzes you can take live with classmates. Sign in with Facebook to start!</string>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                <color key="textColor" red="0.36862745099999999" green="0.13725490200000001" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6v7-1n-T6b">
+                                <rect key="frame" x="30" y="537" width="315" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aT-V6-BIi">
+                                        <rect key="frame" x="69" y="15.5" width="177" height="20"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1M-K5-GSQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
+                                        <connections>
+                                            <action selector="loginBtnClicked:" destination="nNu-R4-Jhk" eventType="touchUpInside" id="Tzk-wB-gZl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.36862745099999999" green="0.13725490200000001" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="6aT-V6-BIi" firstAttribute="centerY" secondItem="6v7-1n-T6b" secondAttribute="centerY" id="IF1-eO-6VO"/>
+                                    <constraint firstItem="G1M-K5-GSQ" firstAttribute="top" secondItem="6v7-1n-T6b" secondAttribute="top" id="PGL-Gd-lS5"/>
+                                    <constraint firstItem="G1M-K5-GSQ" firstAttribute="leading" secondItem="6v7-1n-T6b" secondAttribute="leading" id="R8m-V9-6nZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="G1M-K5-GSQ" secondAttribute="bottom" id="j51-hc-tmm"/>
+                                    <constraint firstAttribute="trailing" secondItem="G1M-K5-GSQ" secondAttribute="trailing" id="jL6-ha-Q47"/>
+                                    <constraint firstAttribute="height" constant="50" id="nG2-Go-haF"/>
+                                    <constraint firstItem="6aT-V6-BIi" firstAttribute="centerX" secondItem="6v7-1n-T6b" secondAttribute="centerX" id="xla-R2-Wen"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wm7-97-ENa" firstAttribute="leading" secondItem="zou-uV-AvL" secondAttribute="leading" constant="40" id="47w-ma-go3"/>
+                            <constraint firstItem="zou-uV-AvL" firstAttribute="trailing" secondItem="wm7-97-ENa" secondAttribute="trailing" constant="40" id="4Bm-Wy-EZa"/>
+                            <constraint firstItem="XBg-RC-TKm" firstAttribute="leading" secondItem="zou-uV-AvL" secondAttribute="leading" constant="80" id="83d-zc-s68"/>
+                            <constraint firstItem="zou-uV-AvL" firstAttribute="trailing" secondItem="XBg-RC-TKm" secondAttribute="trailing" constant="80" id="G8c-eB-1i2"/>
+                            <constraint firstItem="zou-uV-AvL" firstAttribute="trailing" secondItem="6v7-1n-T6b" secondAttribute="trailing" constant="30" id="GhQ-3o-EUM"/>
+                            <constraint firstItem="XBg-RC-TKm" firstAttribute="centerY" secondItem="bOD-L2-jfw" secondAttribute="centerY" constant="-140" id="XFN-GX-Wcc"/>
+                            <constraint firstItem="wm7-97-ENa" firstAttribute="top" secondItem="XBg-RC-TKm" secondAttribute="bottom" constant="20" id="jyJ-8v-acw"/>
+                            <constraint firstItem="zou-uV-AvL" firstAttribute="bottom" secondItem="6v7-1n-T6b" secondAttribute="bottom" constant="80" id="nRY-VF-wMj"/>
+                            <constraint firstItem="6v7-1n-T6b" firstAttribute="leading" secondItem="zou-uV-AvL" secondAttribute="leading" constant="30" id="nhc-aA-RnN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zou-uV-AvL"/>
+                    </view>
+                    <connections>
+                        <outlet property="fbBtnBack" destination="6v7-1n-T6b" id="10z-wx-SyZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bSd-IR-G7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="732" y="33.733133433283363"/>
+        </scene>
     </scenes>
     <resources>
         <image name="close" width="100" height="100"/>
+        <image name="cramlogo" width="1250" height="500"/>
         <image name="downarrow" width="315" height="315"/>
         <image name="rightarrow" width="114" height="185"/>
         <image name="star" width="127" height="127"/>

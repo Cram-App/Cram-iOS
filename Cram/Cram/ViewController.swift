@@ -28,6 +28,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var friendLineLeading: NSLayoutConstraint!
     @IBOutlet weak var friendViewLeading: NSLayoutConstraint!
     
+    @IBOutlet weak var mainTitle: UILabel!
+    @IBOutlet weak var mainSubtitle: UILabel!
+    
     var friendLiveCount = 20
     var classCount = 20
     var topicsCount = 20
@@ -157,6 +160,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             self.downView.alpha = 0
         }
         
+        mainTitle.fadeOut()
+        mainSubtitle.fadeOut()
+        mainTitle.text = "Topics"
+        mainSubtitle.text = "in Data Structures"
+        mainTitle.fadeIn()
+        mainSubtitle.fadeIn()
+        
         print(indexPath.row)
     }
     
@@ -190,6 +200,20 @@ extension CGSize {
     
     init(_ width:CGFloat,_ height:CGFloat) {
         self.init(width:width,height:height)
+    }
+}
+
+extension UIView {
+    
+    func fadeIn(duration: TimeInterval = 0.2, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveLinear, animations: {
+            self.alpha = 1.0
+        }, completion: completion)  }
+    
+    func fadeOut(duration: TimeInterval = 0.2, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveLinear, animations: {
+            self.alpha = 0.0
+        }, completion: completion)
     }
 }
 
