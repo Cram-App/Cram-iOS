@@ -249,8 +249,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             let friendUrl = URL(string: "https://graph.facebook.com/\(friendsInMatchID[indexPath.row])/picture?type=large")
             cell.cellImg.sd_setImage(with: friendUrl)
             
-            if friendsInMatchName[indexPath.row] != nil{
-                cell.cellName.text = friendsInMatchName[indexPath.row]
+            if friendsInMatchName[indexPath.row] != ""{
+                cell.cellName.text = String(friendsInMatchName[indexPath.row].split(separator: " ").first!)
             }
         }
         else{
