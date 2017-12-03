@@ -84,6 +84,13 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var activityIndicatorView = UIActivityIndicatorView()
     var loaderMessage = UILabel()
     
+    // Question results
+    @IBOutlet weak var questionWinner: UIView!
+    @IBOutlet weak var questionWinnerImg: UIImageView!
+    @IBOutlet weak var questionWinnerText: UILabel!
+    @IBOutlet weak var yourPoints: UILabel!
+    @IBOutlet weak var closeGameBtnBack: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -118,6 +125,15 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let headerHeight: CGFloat =  CGFloat(Int(waitingRoomTableView.rowHeight) * waitingRoomTableView.numberOfRows(inSection: 0)) / 2
         waitingRoomTableView.contentInset = UIEdgeInsetsMake(headerHeight, 0, -headerHeight, 0)
+        
+        // Game result
+        closeGameBtnBack.layer.cornerRadius = closeGameBtnBack.frame.size.height / 2
+        closeGameBtnBack.layer.masksToBounds = true
+        questionWinnerImg.layer.cornerRadius = questionWinnerImg.frame.size.height / 2
+        questionWinnerImg.layer.masksToBounds = true
+        questionWinner.layer.cornerRadius = 6
+        questionWinner.layer.masksToBounds = true
+        questionWinner.alpha = 0.0
 //
 //        // DEMO ADDING A PERSON
 //        let when = DispatchTime.now() + 3
@@ -210,6 +226,15 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func inGame(index: Int) {
         
         if index == questions.count {
+            
+            for subview in questionBack.subviews {
+                if subview != questionWinner {
+                    subview.fadeOut()
+                } else {
+                    subview.fadeIn()
+                }
+            }
+    
             return
         }
         
@@ -401,7 +426,13 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         
     }
-
+   
+    
+   
+    @IBAction func closeGameBtnClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func cancelGameBtnClicked(_ sender: Any) {
         // Do Stuff
         self.dismiss(animated: true, completion: nil)
