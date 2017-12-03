@@ -7,6 +7,15 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
+import FBSDKShareKit
+import SDWebImage
+import Firebase
+
+var type = String()
+var gameRef : DatabaseReference!
+//implement type and follow database event
 
 class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
 
@@ -37,7 +46,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     var totalSecondsCountDown = 10.0
     var gameTimer: Timer!
-    var friendGameCount = 1
+    var gameLeadboard = [String: (String, Int, Int)]() //id, name, totalPoints, gamePoints
     
     var friendLiveCount = 10
     let questions =
@@ -51,13 +60,12 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     [
         "You"
     ]
-    var friendsInGamePics =
-    [
-        "testface"
+    var friendsInGamePics = [
+        UIImage()
     ]
     var friendsInGamePoints =
     [
-        125
+        userPoints
     ]
     
     override func viewDidLoad() {
@@ -86,14 +94,14 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let headerHeight: CGFloat =  CGFloat(Int(waitingRoomTableView.rowHeight) * waitingRoomTableView.numberOfRows(inSection: 0)) / 2
         waitingRoomTableView.contentInset = UIEdgeInsetsMake(headerHeight, 0, -headerHeight, 0)
-        
-        // DEMO ADDING A PERSON
-        let when = DispatchTime.now() + 3
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            
-            // THIS CRASHES
-            self.addFriend(name: "Brian", pic: "testface", points: 34)
-        }
+//
+//        // DEMO ADDING A PERSON
+//        let when = DispatchTime.now() + 3
+//        DispatchQueue.main.asyncAfter(deadline: when) {
+//
+//            // THIS CRASHES
+//            self.addFriend(name: "Brian", pic: "testface", points: 34)
+//        }
 
         // Do any additional setup after loading the view.
     }
@@ -110,10 +118,11 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         btnBack3.layer.cornerRadius = btnBack1.frame.size.height / 2
         btnBack4.layer.cornerRadius = btnBack1.frame.size.height / 2
         
+        self.followGame()
         //questionText.alpha = 0.0
     }
     
-    func addFriend(name: String, pic: String, points: Int) {
+    func addFriend(name: String, pic: UIImage, points: Int) {
         
         waitingRoomTableView.beginUpdates()
         
@@ -246,7 +255,14 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         let cell = tableView.dequeueReusableCell(withIdentifier: "joinedFriend", for: indexPath) as! JoinedFriend
         cell.backgroundColor = UIColor.white
         cell.friendName.text = "\(friendsInGame[indexPath.row]) joined!"
-        cell.friendImg.image = UIImage(named: friendsInGamePics[indexPath.row])
+        
+        if indexPath.row == 0{
+            let picUrl = URL(string: "https://graph.facebook.com/\(userID)/picture?type=large")
+            cell.friendImg.sd_setImage(with: picUrl)
+        }
+        else{
+            cell.friendImg.image = friendsInGamePics[indexPath.row]
+        }
         cell.friendPoints.text = "\(friendsInGamePoints[indexPath.row])"
         
         return cell
@@ -262,6 +278,99 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         return friendsInGame.count
         
+    }
+    
+    func followGame(){
+        if type == "HOST" && gameRef != nil{
+            gameRef.observe(.value, with: {(snapshot) in
+
+                if( snapshot.value is NSNull){
+                    print("Invalid or expired game")
+                    return
+                }
+                else{
+                    print("Game Changed")
+                    var data  = snapshot.value! as! [String: Any]
+
+                    if let leadboard = data["leadboard"] as? [String : Any]{
+                        print("Game Leadboard", leadboard)
+                        
+
+                        if leadboard.count != self.gameLeadboard.count{
+                            //for x in (leadboard.count - self.gameLeadboard.count)..<leadboard.count{ }
+                            //Possible way to properly create animations
+                            self.gameLeadboard = [String: (String, Int, Int)]()
+                            
+                            for friend in leadboard{
+                                if friend.key != userID{
+                                    let friendData = friend.value as! [String: Any]
+                                    
+                                    if let friendName = friendData["name"] as? String,
+                                    let friendGP = friendData["gamePoints"] as? Int,
+                                    let friendTP = friendData["totalPoints"] as? Int{
+                                    
+                                        //// id: (name, totalPoints, gamePoints)
+                                        self.gameLeadboard[friend.key] = (friendName, friendGP, friendTP)
+                                    }
+                                    else{
+                                        print("incorrect friend style")
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    
+                    for friend in self.gameLeadboard{
+                        let when = DispatchTime.now() + 3
+                        let picUrl = URL(string: "https://graph.facebook.com/\(friend.key)/picture?type=large")
+                        let friendPic = UIImageView()
+                        friendPic.sd_setImage(with: picUrl)
+                        let friendName = friend.value.0
+                        let friendTP = friend.value.1
+                        DispatchQueue.main.asyncAfter(deadline: when) {
+                            
+                            self.addFriend(name: friendName, pic: friendPic.image!, points: friendTP)
+                            
+                        }
+                    }
+
+                }
+                
+            })
+            
+        }
+//        if type != "" && gameRef != nil{
+//            
+//            gameRef.observe(.value, with: {(snapshot) in
+//                
+//                if( snapshot.value is NSNull){
+//                    print("Invalid of expired game")
+//                    return
+//                }
+//                else{
+//                    var data  = snapshot.value! as! [String: Any]
+//                    
+//                    if let leadboard = data["leadboard"] as? [String : Any]{
+//                        print("Game Leadboard", leadboard)
+//                        
+//                        if leadboard.count != self.gameLeadboard.count{
+//                            //for x in (leadboard.count - self.gameLeadboard.count)..<leadboard.count{ }
+//                            //Possible way to properly create animations
+//                            self.gameLeadboard = [String: (String, Int, Int)]()
+//                            for friend in leadboard{
+//                                self.gameLeadboard["\(friend.key)"]
+//                            }
+//                        }
+//                        
+//                    }
+//                    
+//                }
+//                
+//                
+//                
+//            })
+//        }
     }
 
 }

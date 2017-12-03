@@ -78,6 +78,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if(UserDefaults.standard.value(forKey: "friendsInGame") != nil){
             friendsInGame = (UserDefaults.standard.value(forKey: "friendsInGame") as! [String])
         }
+        if(UserDefaults.standard.value(forKey: "userID") != nil){
+            userID = (UserDefaults.standard.value(forKey: "userID") as! String)
+        }
+        if(UserDefaults.standard.value(forKey: "userPoints") != nil){
+            userPoints = (UserDefaults.standard.value(forKey: "userPoints") as! Int)
+        }
+        if(UserDefaults.standard.value(forKey: "userName") != nil){
+            userName = (UserDefaults.standard.value(forKey: "userName") as! String)
+        }
         
         //Launch Facebook Login
         self.loginToFB()
@@ -295,8 +304,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         print("CLICKED")
         
-        self.createGame()
-        
         if tableView == classTableView {
             
             self.friendLineTrailing.constant = view.frame.size.width
@@ -336,7 +343,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if tableView == topicsTableView {
             
-            self.performSegue(withIdentifier: "goLive", sender: nil)
+            type = "HOST"
+            self.createGame()
+            
+            //Reduntant when creating game
+            //self.performSegue(withIdentifier: "goLive", sender: nil)
             
             print(indexPath.row)
             tableView.deselectRow(at: indexPath, animated: false)
@@ -428,7 +439,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //Creates Game Session
     func createGame(){
-        let gameRef = ref.child("currentGames").childByAutoId()
+        gameRef = ref.child("currentGames").childByAutoId()
+        
         gameRef.child("leadboard/\(userID)/name").setValue(userName)
         gameRef.child("leadboard/\(userID)/totalPoints").setValue(userPoints)
         gameRef.child("leadboard/\(userID)/gamePoints").setValue(0)
@@ -439,7 +451,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
         }
         
-        self.followGame(gameRef: gameRef)
+        self.performSegue(withIdentifier: "goLive", sender: nil)
+    }
+    
+    func joinGame(gameKey: String, type: String){
+        
     }
     
     //Observes Game Changes (HOST)
@@ -450,10 +466,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 print("Invalid of expired game")
             }
             
+            
+            
         })
     }
     
-    //Observes Game Changes (INVITED)
+    //Observes Game Changes (GUEST)
     func followGame(gameKey: String){
         ref.child("currentGames").child(gameKey).observe(.value, with: {(snapshot) in
             
