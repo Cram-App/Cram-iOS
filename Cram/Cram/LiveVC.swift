@@ -250,8 +250,19 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func inGame(index: Int) {
         
         if index == questions.count {
+            saveProfile()
+            
+            for subview in questionBack.subviews {
+                if subview != questionWinner {
+                    subview.fadeOut()
+                } else {
+                    subview.fadeIn()
+                }
+            }
+            
             return
         }
+        else{
         
         //Question Set up
         self.questionCountText.text = "\(index + 1)/\(questions.count)"
@@ -283,10 +294,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 || rightAnswer == 3 && self.btn3Selected || rightAnswer == 4 && self.btn4Selected {
                 
                 self.gamePoints += self.pointsEarned
-                gameRef.child("leadboard/\(userID)/gamePoints").setValue(self.gamePoints)
+                //gameRef.child("leadboard/\(userID)/gamePoints").setValue(self.gamePoints)
                 userPoints += self.pointsEarned
                 self.leadPoints.text = "\(self.gamePoints)"
-                saveProfile()
+                //saveProfile()
                 
                 self.answerStatus.image = UIImage(named: "check")
             } else {
@@ -328,8 +339,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 
                 self.inGame(index: index + 1)
                 
+                }
             }
-            
         }
         
     }
