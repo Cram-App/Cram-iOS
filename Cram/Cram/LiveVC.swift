@@ -52,6 +52,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var cancelGameBtn: UIButton!
     
     
+    var gameInitialized = false
+    
     var gamePoints = 0
     var totalSecondsCountDown = 10.0
     var gameTimer: Timer!
@@ -258,9 +260,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     subview.fadeIn()
                 }
             }
-    
+            
             return
         }
+        else{
         
         //Question Set up
         self.questionCountText.text = "\(index + 1)/\(questions.count)"
@@ -292,7 +295,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 || rightAnswer == 3 && self.btn3Selected || rightAnswer == 4 && self.btn4Selected {
                 
                 self.gamePoints += self.pointsEarned
-                gameRef.child("leadboard/\(userID)/gamePoints").setValue(self.gamePoints)
+                //gameRef.child("leadboard/\(userID)/gamePoints").setValue(self.gamePoints)
                 userPoints += self.pointsEarned
                 self.leadPoints.text = "\(self.gamePoints) pts"
                 saveProfile()
@@ -337,8 +340,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 
                 self.inGame(index: index + 1)
                 
+                }
             }
-            
         }
         
     }
@@ -426,10 +429,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if type == "HOST"{
             
             var questionArray = [
-                    "This is a question that was generated automatically from a course video lecture! ONE",
-                    "This is a question that was generated automatically from a course video lecture! TWO",
-                    "This is a question that was generated automatically from a course video lecture! THREE",
-                    "This is a question that was generated automatically from a course video lecture! FOUR"
+                    "Select Pig",
+                    "Select Water",
+                    "Select Your Destiny",
+                    "LiveGreen"
             ]
             
             var bt1 = ["1",
@@ -437,23 +440,23 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                        "1",
                        "1"
             ]
-            var bt2 = ["2",
+            var bt2 = ["Pig",
                        "2",
                        "2",
                        "2"
             ]
             var bt3 = ["3",
                        "3",
-                       "3",
+                       "Cocaine",
                        "3"
             ]
             var bt4 = ["4",
+                       "Water",
                        "4",
-                       "4",
-                       "4"
+                       "LiveGreen"
             ]
             
-            var answers = [1,0,2,2]
+            var answers = [1,3,2,3]
             
             var questionsDB: [String: Any] = ["titles" : questionArray, "bt1" : bt1, "bt2" : bt2, "bt3" : bt3, "bt4" : bt4, "answers" : answers]
             
@@ -661,7 +664,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func showCorrectAnswer(index: Int) -> Int {
         
         // Compares Selected Cell with right answer
-        let correctAnswer = answerIndexArray[index]
+        let correctAnswer = answerIndexArray[index] + 1
         
         if correctAnswer == 1 {
             
@@ -849,14 +852,18 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     }
                     
                     if let questionData = data["questions"] as? [String: Any]{
-                        print("questions")
-                        print(questionData["titles"] as! [String])
-                        self.questions = questionData["titles"] as! [String]
-                        self.buttonOneArray = questionData["bt1"] as! [String]
-                        self.buttonTwoArray = questionData["bt2"] as! [String]
-                        self.buttonThreeArray = questionData["bt3"] as! [String]
-                        self.buttonFourArray = questionData["bt4"] as! [String]
-                        self.answerIndexArray = questionData["answers"] as! [Int]
+                        if self.gameInitialized == false{
+                            print("questions")
+                            print(questionData["titles"] as! [String])
+                            self.questions = questionData["titles"] as! [String]
+                            self.buttonOneArray = questionData["bt1"] as! [String]
+                            self.buttonTwoArray = questionData["bt2"] as! [String]
+                            self.buttonThreeArray = questionData["bt3"] as! [String]
+                            self.buttonFourArray = questionData["bt4"] as! [String]
+                            self.answerIndexArray = questionData["answers"] as! [Int]
+                            
+                            self.gameInitialized = true
+                        }
                         
                     }
                     
