@@ -104,20 +104,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             userName = (UserDefaults.standard.value(forKey: "userName") as! String)
         }
         
-        let when = DispatchTime.now() + 2
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            self.popupHeight.constant = 105
-            
-            UIView.animate(withDuration: 0.25) {
-                
-                self.view.layoutIfNeeded()
-                self.popupBack.alpha = 1
-                
-                let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
-                statusBarWindow?.alpha = 0.0
-                
-            }
-        }
+        mainPointsLabel.text = "\(userPoints)"
+        
+//        let when = DispatchTime.now() + 2
+//        DispatchQueue.main.asyncAfter(deadline: when) {
+//            self.popupHeight.constant = 105
+//            
+//            UIView.animate(withDuration: 0.25) {
+//                
+//                self.view.layoutIfNeeded()
+//                self.popupBack.alpha = 1
+//                
+//                let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+//                statusBarWindow?.alpha = 0.0
+//                
+//            }
+//        }
         
         //Launch Facebook Login
         self.loginToFB()
@@ -465,21 +467,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func observeUserDB(){
         if userID != ""{
         ref.child("users").child(userID).observe(.value, with: {(snapshot) in
+            
             print("User Value Changed")
             if( snapshot.value is NSNull){
                 print("No Internet")
             }
+                
             else{
                 var data  = snapshot.value! as! [String: Any]
                 userPoints = data["points"] as! Int
-                print("User Points", userPoints)
+                self.mainPointsLabel.text = "\(userPoints)"
                 
                 if data["pendingGames"] != nil{
+                    
                     //Execute Pending Game
                     //Popup Joining Section
-                    print("Invited For Game Session: ", data["pendingGames"] as! String )
+                    print("Invited For Game Session: , pendingGames",data["pendingGames"] as! String)
                     
                     self.popupHeight.constant = 105
+                    print("pendinggames link \(data["pendingGames"] as! String)" )
+                    gameRef = ref.child("currentGames/\(data["pendingGames"] as! String)")
                     
                     UIView.animate(withDuration: 0.5) {
                         
@@ -502,50 +509,33 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //Creates Game Session
     func createGame(){
         gameRef = ref.child("currentGames").childByAutoId()
-        
+
         gameRef.child("leadboard/\(userID)/name").setValue(userName)
         gameRef.child("leadboard/\(userID)/totalPoints").setValue(userPoints)
         gameRef.child("leadboard/\(userID)/gamePoints").setValue(0)
-        
+
         for friend in friendsInGame{
             if friend != userID{
                 ref.child("users/\(friend)/pendingGames").setValue(gameRef.key)
             }
         }
-        
+
         self.performSegue(withIdentifier: "goLive", sender: nil)
     }
     
-    func joinGame(gameKey: String, type: String){
-        
-    }
-    
-    //Observes Game Changes (HOST)
-    func followGame(gameRef: DatabaseReference){
-        gameRef.observe(.value, with: {(snapshot) in
-            
-            if( snapshot.value is NSNull){
-                print("Invalid of expired game")
-            }
-            
-            
-            
-        })
-    }
-    
-    //Observes Game Changes (GUEST)
-    func followGame(gameKey: String){
-        ref.child("currentGames").child(gameKey).observe(.value, with: {(snapshot) in
-            
-            if( snapshot.value is NSNull){
-                print("Invalid of expired game")
-            }
-            self.joinSession(gameKey: gameKey)
-            
-        })
-    }
-    
     @IBAction func acceptQuizClicked(_ sender: Any) {
+        
+        print("joining session")
+        print("gamekey", gameRef.key)
+        self.joinSession()
+        type = "GUEST"
+        
+        let when = DispatchTime.now() + 1.5
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            print("going live")
+            self.performSegue(withIdentifier: "goLive", sender: nil)
+        }
+        
     }
     
     @IBAction func denyQuizClicked(_ sender: Any) {
@@ -563,12 +553,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     //Joins game if possible
-    func joinSession(gameKey: String){
+    func joinSession(){
         
-        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/name").setValue(userName)
-        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/totalPoints").setValue(userPoints)
-        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/gamePoints").setValue(0)
-
+        print("Beginning")
+        if userID != "", userName != ""{
+            gameRef.child("leadboard/\(userID)/name").setValue(userName)
+            gameRef.child("leadboard/\(userID)/totalPoints").setValue(userPoints)
+            gameRef.child("leadboard/\(userID)/gamePoints").setValue(0)
+        }
+        else{
+            print("failed if statement")
+        }
+        print("Successfully joining")
     }
     
     func denySession(){

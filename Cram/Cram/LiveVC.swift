@@ -72,6 +72,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("beggining to load Live page")
+        
         waitingRoomBackView.isHidden = false
         countdownLabel.isHidden = true
         
@@ -348,7 +350,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func followGame(){
-        if type == "HOST" && gameRef != nil{
+        if gameRef != nil{
             gameRef.observe(.value, with: {(snapshot) in
 
                 if( snapshot.value is NSNull){
