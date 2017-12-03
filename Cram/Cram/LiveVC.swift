@@ -34,6 +34,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var waitingMessage: UILabel!
     @IBOutlet weak var waitingBtnBack: UIView!
     @IBOutlet weak var waitingRoomBackView: UIView!
+    @IBOutlet weak var countdownLabel: UILabel!
     
     var totalSecondsCountDown = 10.0
     var gameTimer: Timer!
@@ -64,6 +65,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         
         waitingRoomBackView.isHidden = false
+        countdownLabel.isHidden = true
         
         liveCollectionView.dataSource = self
         liveCollectionView.delegate = self
@@ -191,8 +193,27 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBAction func startGameBtnClicked(_ sender: Any) {
         
         // Starts game
-        waitingRoomBackView.isHidden = true
-        self.inGame(index: 0)
+        // waitingRoomBackView.isHidden = true
+        
+        for subview in waitingRoomBackView.subviews {
+            subview.isHidden = true
+        }
+        
+        countdownLabel.isHidden = false
+        
+        var bounds = countdownLabel.bounds
+        countdownLabel.font = countdownLabel.font.withSize(200)
+        bounds.size = countdownLabel.intrinsicContentSize
+        countdownLabel.bounds = bounds
+        let scaleX = CGFloat(0.25)
+        let scaleY = CGFloat(0.25)
+        countdownLabel.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+        
+        UIView.animate(withDuration: 1.0) {
+            self.countdownLabel.transform = .identity
+        }
+        
+        //self.inGame(index: 0)
     }
 
     @IBAction func cancelGameBtnClicked(_ sender: Any) {
