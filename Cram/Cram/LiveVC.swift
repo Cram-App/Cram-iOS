@@ -47,6 +47,9 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var waitingRoomBackView: UIView!
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var gameID: UILabel!
+    @IBOutlet weak var startGameBtnText: UILabel!
+    @IBOutlet weak var cancelGameBtn: UIButton!
+    
     
     var gameInitialized = false
     
@@ -92,6 +95,12 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var loaderMessage = UILabel()
     
     var pointsEarned = 0
+    // Question results
+    @IBOutlet weak var questionWinner: UIView!
+    @IBOutlet weak var questionWinnerImg: UIImageView!
+    @IBOutlet weak var questionWinnerText: UILabel!
+    @IBOutlet weak var yourPoints: UILabel!
+    @IBOutlet weak var closeGameBtnBack: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,6 +136,15 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let headerHeight: CGFloat =  CGFloat(Int(waitingRoomTableView.rowHeight) * waitingRoomTableView.numberOfRows(inSection: 0)) / 2
         waitingRoomTableView.contentInset = UIEdgeInsetsMake(headerHeight, 0, -headerHeight, 0)
+        
+        // Game result
+        closeGameBtnBack.layer.cornerRadius = closeGameBtnBack.frame.size.height / 2
+        closeGameBtnBack.layer.masksToBounds = true
+        questionWinnerImg.layer.cornerRadius = questionWinnerImg.frame.size.height / 2
+        questionWinnerImg.layer.masksToBounds = true
+        questionWinner.layer.cornerRadius = 6
+        questionWinner.layer.masksToBounds = true
+        questionWinner.alpha = 0.0
 //
 //        // DEMO ADDING A PERSON
 //        let when = DispatchTime.now() + 3
@@ -178,6 +196,17 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         
         self.followGame()
+        
+        if type == "HOST" {
+            
+            startGameBtnText.text = "Start game!"
+            cancelGameBtn.isHidden = false
+            
+        } else {
+            
+            startGameBtnText.text = "Exit game"
+            cancelGameBtn.isHidden = true
+        }
  
     }
     
@@ -276,6 +305,14 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             let whenIn = DispatchTime.now() + 5
             DispatchQueue.main.asyncAfter(deadline: whenIn) {
                 
+                // Reset the answer status
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.answerStatus.alpha = 0.0
+                    let scaleX = CGFloat(0.5)
+                    let scaleY = CGFloat(0.5)
+                    self.answerStatus.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+                }, completion: nil)
+                
                 self.timer.animate(fromAngle: self.timer.angle, toAngle: 0.0, duration: 1.0, completion: nil)
                 self.totalSecondsCountDown = 10.0 + 1.0
                 
@@ -288,14 +325,6 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.btnText4.fadeOut()
                 
                 self.resetButtons()
-                
-                // Reset the answer status
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.answerStatus.alpha = 0.0
-                    let scaleX = CGFloat(0.5)
-                    let scaleY = CGFloat(0.5)
-                    self.answerStatus.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
-                }, completion: nil)
                 
                 self.inGame(index: index + 1)
                 
@@ -426,6 +455,9 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             date.addTimeInterval(5)
             
             gameRef.child("startingDate").setValue(date.timeIntervalSince1970)
+        } else {
+            
+            self.dismiss(animated: true, completion: nil)
         }
         
     }
@@ -452,7 +484,13 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         
     }
-
+   
+    
+   
+    @IBAction func closeGameBtnClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func cancelGameBtnClicked(_ sender: Any) {
         // Do Stuff
         self.dismiss(animated: true, completion: nil)

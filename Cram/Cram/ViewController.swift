@@ -119,7 +119,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         ["Earthquakes","Volcanoes","Tsunamis","Landslides","Coastal Flooding","Tornadoes","Hurricanes","Meteoritic Impacts","Hazard Mitigation Strategies"],
         ["Theories of Translation","Ekphrasis","Proper Use of Archives","The Paintings of Mantegna","The Paintings of Rembrandt","Arabian Nights"],
         ["Vectors and Kinematics","Newton's Laws","Momentum","Energy","Random Walks","Diffusion","Fluid Mechanics","Mathematical Modeling","Statistical Mechanics"],
-        ["Tonal Harmony","Counterpoint","Phrase Rhythm","Motivic Development","model composition"]
+        ["Tonal Harmony","Counterpoint","Phrase Rhythm","Motivic Development","Model Composition"]
     ]
     
     override func viewDidLoad() {
@@ -255,7 +255,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
-    func updateFriends(){
+    func updateFriends() {
         
         FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "id"]).start { (connection, result, err) in
             
@@ -276,11 +276,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
-    func saveFriends(){
+    func saveFriends() {
         UserDefaults.standard.setValue(friendsInGame, forKey: "friendsInGame")
     }
     
-    func updateDBValues(){
+    func updateDBValues() {
         ref.child("users/\(userID)/name").setValue(userName)
         ref.child("users/\(userID)/points").setValue(userPoints)
         ref.child("users/\(userID)/friendsInGame").setValue(friendsInGame)
@@ -433,7 +433,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             mainTitle.fadeOut()
             mainSubtitle.fadeOut()
             mainTitle.text = "Topics"
-            mainSubtitle.text = "in Data Structures"
+            mainSubtitle.text = "in \(courseTitles[topicsIndex])"
             mainTitle.fadeIn()
             mainSubtitle.fadeIn()
             
