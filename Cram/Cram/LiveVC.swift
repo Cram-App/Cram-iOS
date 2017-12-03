@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import FBSDKShareKit
 import SDWebImage
 import Firebase
+import GameKit
 
 var type = String()
 var gameRef : DatabaseReference!
@@ -38,12 +39,14 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var questionCountText: UILabel!
     @IBOutlet weak var questionText: UILabel!
     @IBOutlet weak var timer: KDCircularProgress!
+    @IBOutlet weak var answerStatus: UIImageView!
     
     @IBOutlet weak var waitingRoomTableView: UITableView!
     @IBOutlet weak var waitingMessage: UILabel!
     @IBOutlet weak var waitingBtnBack: UIView!
     @IBOutlet weak var waitingRoomBackView: UIView!
     @IBOutlet weak var countdownLabel: UILabel!
+    @IBOutlet weak var gameID: UILabel!
     
     var totalSecondsCountDown = 10.0
     var gameTimer: Timer!
@@ -72,17 +75,23 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     [
         userPoints
     ]
-    var mainBorderWidth: CGFloat = 3.0
+    var mainBorderWidth: CGFloat = 2.0
     
     var btn1Selected = false
     var btn2Selected = false
     var btn3Selected = false
     var btn4Selected = false
+    var activityIndicatorView = UIActivityIndicatorView()
+    var loaderMessage = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("beggining to load Live page")
+        
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(topPulled))
+        edgePan.edges = .bottom
+        view.addGestureRecognizer(edgePan)
         
         waitingRoomBackView.isHidden = false
         countdownLabel.isHidden = true
@@ -103,6 +112,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         timerBack.layer.masksToBounds = true
         
         timer.angle = 360
+        answerStatus.alpha = 0.0
         waitingBtnBack.layer.cornerRadius = waitingBtnBack.frame.size.height / 2
         waitingBtnBack.layer.masksToBounds = true
         
@@ -120,22 +130,22 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         // Do any additional setup after loading the view.
         
         // Initial button styles
-        btnBack1.backgroundColor = UIColor.clear
-        btnText1.textColor = purple
-        btnBack1.layer.borderWidth = mainBorderWidth
-        btnBack1.layer.borderColor = purple.cgColor
-        btnBack2.backgroundColor = UIColor.clear
-        btnText2.textColor = purple
-        btnBack2.layer.borderWidth = mainBorderWidth
-        btnBack2.layer.borderColor = purple.cgColor
-        btnBack3.backgroundColor = UIColor.clear
-        btnText3.textColor = purple
-        btnBack3.layer.borderWidth = mainBorderWidth
-        btnBack3.layer.borderColor = purple.cgColor
-        btnBack4.backgroundColor = UIColor.clear
-        btnText4.textColor = purple
-        btnBack4.layer.borderWidth = mainBorderWidth
-        btnBack4.layer.borderColor = purple.cgColor
+        resetButtons()
+        
+        // Loader
+        activityIndicatorView.frame = CGRect(x: (view.frame.size.width / 2) - 30, y: (view.frame.size.height / 2) - 80, width: 60, height: 60)
+        activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        activityIndicatorView.isHidden = true
+        view.addSubview(activityIndicatorView)
+        
+        loaderMessage.frame = CGRect(x: 40, y: activityIndicatorView.frame.maxY + 15, width: view.frame.size.width - 80, height: 50)
+        loaderMessage.numberOfLines = 0
+        loaderMessage.textAlignment = .center
+        loaderMessage.font = UIFont(name: "Montserrat-Medium", size: 20)
+        loaderMessage.lineBreakMode = .byWordWrapping
+        loaderMessage.textColor = UIColor.white
+        loaderMessage.isHidden = true
+        view.addSubview(loaderMessage)
         
     }
 
@@ -144,15 +154,20 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.btnBack1.layer.cornerRadius = self.btnBack1.frame.size.height / 2
+            self.btnBack2.layer.cornerRadius = self.btnBack1.frame.size.height / 2
+            self.btnBack3.layer.cornerRadius = self.btnBack1.frame.size.height / 2
+            self.btnBack4.layer.cornerRadius = self.btnBack1.frame.size.height / 2
+        }, completion: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
-        btnBack1.layer.cornerRadius = btnBack1.frame.size.height / 2
-        btnBack2.layer.cornerRadius = btnBack1.frame.size.height / 2
-        btnBack3.layer.cornerRadius = btnBack1.frame.size.height / 2
-        btnBack4.layer.cornerRadius = btnBack1.frame.size.height / 2
-        
         self.followGame()
-        //questionText.alpha = 0.0
+ 
     }
     
     func addFriend(name: String, pic: UIImage, points: Int) {
@@ -210,21 +225,54 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         questionText.text = questions[index]
         startCountDownTimer()
         
-        let when = DispatchTime.now() + 15
+        let when = DispatchTime.now() + 10
         DispatchQueue.main.asyncAfter(deadline: when) {
             
-            self.timer.animate(fromAngle: self.timer.angle, toAngle: 0.0, duration: 1.0, completion: nil)
-            self.totalSecondsCountDown = 10.0 + 1.0
+            // Get right answer and animate the status
+            let rightAnswer = self.showCorrectAnswer()
             
-            //Fadeout
-            self.questionText.fadeOut()
-            self.questionCountText.fadeOut()
-            self.btnText1.fadeOut()
-            self.btnText2.fadeOut()
-            self.btnText3.fadeOut()
-            self.btnText4.fadeOut()
+            if rightAnswer == 1 && self.btn1Selected || rightAnswer == 2 && self.btn2Selected
+                || rightAnswer == 3 && self.btn3Selected || rightAnswer == 4 && self.btn4Selected {
+                self.answerStatus.image = UIImage(named: "check")
+            } else {
+                self.answerStatus.image = UIImage(named: "wrong")
+            }
             
-            self.inGame(index: index + 1)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.answerStatus.alpha = 1.0
+                let scaleX = CGFloat(1.0)
+                let scaleY = CGFloat(1.0)
+                self.answerStatus.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+            }, completion: nil)
+            
+            // Time in between questions
+            let whenIn = DispatchTime.now() + 5
+            DispatchQueue.main.asyncAfter(deadline: whenIn) {
+                
+                self.timer.animate(fromAngle: self.timer.angle, toAngle: 0.0, duration: 1.0, completion: nil)
+                self.totalSecondsCountDown = 10.0 + 1.0
+                
+                //Fadeout
+                self.questionText.fadeOut()
+                self.questionCountText.fadeOut()
+                self.btnText1.fadeOut()
+                self.btnText2.fadeOut()
+                self.btnText3.fadeOut()
+                self.btnText4.fadeOut()
+                
+                self.resetButtons()
+                
+                // Reset the answer status
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.answerStatus.alpha = 0.0
+                    let scaleX = CGFloat(0.5)
+                    let scaleY = CGFloat(0.5)
+                    self.answerStatus.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+                }, completion: nil)
+                
+                self.inGame(index: index + 1)
+                
+            }
             
         }
         
@@ -232,31 +280,25 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func startGameBtnClicked(_ sender: Any) {
         
-        // Shows countdown
+        // Shows countdown after loader and starts game
         
-        for subview in waitingRoomBackView.subviews {
+        for subview in self.waitingRoomBackView.subviews {
             subview.isHidden = true
         }
         
-        countdownLabel.isHidden = false
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.isHidden = false
+        loaderMessage.text = "Converting your lecture into a fun quiz, hang tight!"
+        loaderMessage.isHidden = false
         
-        var bounds = countdownLabel.bounds
-        countdownLabel.font = countdownLabel.font.withSize(200)
-        bounds.size = countdownLabel.intrinsicContentSize
-        countdownLabel.bounds = bounds
-        let scaleX = CGFloat(0.25)
-        let scaleY = CGFloat(0.25)
-        countdownLabel.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
-        
-        UIView.animate(withDuration: 1.0) {
-            self.countdownLabel.transform = .identity
-            
-        }
-        
-        let when = DispatchTime.now() + 1
+        let when = DispatchTime.now() + 5
         DispatchQueue.main.asyncAfter(deadline: when) {
             
-            self.countdownLabel.text = "2"
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.isHidden = true
+            self.loaderMessage.isHidden = true
+            
+            self.countdownLabel.isHidden = false
             
             var bounds = self.countdownLabel.bounds
             self.countdownLabel.font = self.countdownLabel.font.withSize(200)
@@ -270,34 +312,55 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.countdownLabel.transform = .identity
                 
             }
-        }
-        
-        let whenTwo = DispatchTime.now() + 2
-        DispatchQueue.main.asyncAfter(deadline: whenTwo) {
             
-            self.countdownLabel.text = "1"
-            
-            var bounds = self.countdownLabel.bounds
-            self.countdownLabel.font = self.countdownLabel.font.withSize(200)
-            bounds.size = self.countdownLabel.intrinsicContentSize
-            self.countdownLabel.bounds = bounds
-            let scaleX = CGFloat(0.25)
-            let scaleY = CGFloat(0.25)
-            self.countdownLabel.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
-            
-            UIView.animate(withDuration: 1.0) {
-                self.countdownLabel.transform = .identity
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
                 
+                self.countdownLabel.text = "2"
+                
+                var bounds = self.countdownLabel.bounds
+                self.countdownLabel.font = self.countdownLabel.font.withSize(200)
+                bounds.size = self.countdownLabel.intrinsicContentSize
+                self.countdownLabel.bounds = bounds
+                let scaleX = CGFloat(0.25)
+                let scaleY = CGFloat(0.25)
+                self.countdownLabel.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+                
+                UIView.animate(withDuration: 1.0) {
+                    self.countdownLabel.transform = .identity
+                    
+                }
+            }
+            
+            let whenTwo = DispatchTime.now() + 2
+            DispatchQueue.main.asyncAfter(deadline: whenTwo) {
+                
+                self.countdownLabel.text = "1"
+                
+                var bounds = self.countdownLabel.bounds
+                self.countdownLabel.font = self.countdownLabel.font.withSize(200)
+                bounds.size = self.countdownLabel.intrinsicContentSize
+                self.countdownLabel.bounds = bounds
+                let scaleX = CGFloat(0.25)
+                let scaleY = CGFloat(0.25)
+                self.countdownLabel.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+                
+                UIView.animate(withDuration: 1.0) {
+                    self.countdownLabel.transform = .identity
+                    
+                }
+                
+            }
+            
+            let whenThree = DispatchTime.now() + 3
+            DispatchQueue.main.asyncAfter(deadline: whenThree) {
+                
+                // Starts game
+                self.waitingRoomBackView.isHidden = true
+                self.inGame(index: 0)
             }
 
-        }
-        
-        let whenThree = DispatchTime.now() + 3
-        DispatchQueue.main.asyncAfter(deadline: whenThree) {
             
-            // Starts game
-            self.waitingRoomBackView.isHidden = true
-            self.inGame(index: 0)
         }
         
     }
@@ -345,6 +408,13 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             self.gameTimer = nil
         }
         
+    }
+    
+    @objc func topPulled(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        
+        if recognizer.state == .recognized {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // Table view
@@ -418,6 +488,129 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             btnBack4.layer.borderColor = purple.cgColor
         }
         btn4Selected = true
+    }
+    
+    func resetButtons() {
+        
+        btn1Selected = false
+        btn2Selected = false
+        btn3Selected = false
+        btn4Selected = false
+        
+        btnBack1.backgroundColor = UIColor.clear
+        btnText1.textColor = purple
+        btnBack1.layer.borderWidth = mainBorderWidth
+        btnBack1.layer.borderColor = purple.cgColor
+        btnBack2.backgroundColor = UIColor.clear
+        btnText2.textColor = purple
+        btnBack2.layer.borderWidth = mainBorderWidth
+        btnBack2.layer.borderColor = purple.cgColor
+        btnBack3.backgroundColor = UIColor.clear
+        btnText3.textColor = purple
+        btnBack3.layer.borderWidth = mainBorderWidth
+        btnBack3.layer.borderColor = purple.cgColor
+        btnBack4.backgroundColor = UIColor.clear
+        btnText4.textColor = purple
+        btnBack4.layer.borderWidth = mainBorderWidth
+        btnBack4.layer.borderColor = purple.cgColor
+    }
+    
+    func showCorrectAnswer() -> Int {
+        
+        // Generates a random answer for now
+        let random = GKRandomDistribution(lowestValue: 1, highestValue: 4)
+        let correctAnswer = random.nextInt()
+        
+        if correctAnswer == 1 {
+            
+            btnBack1.backgroundColor = green
+            btnText1.textColor = UIColor.white
+            btnBack1.layer.borderWidth = mainBorderWidth
+            btnBack1.layer.borderColor = green.cgColor
+            // ---
+            btnBack2.backgroundColor = veryLightGrey
+            btnText2.textColor = purple
+            btnBack2.layer.borderWidth = mainBorderWidth
+            btnBack2.layer.borderColor = purple.cgColor
+            btnBack3.backgroundColor = veryLightGrey
+            btnText3.textColor = purple
+            btnBack3.layer.borderWidth = mainBorderWidth
+            btnBack3.layer.borderColor = purple.cgColor
+            btnBack4.backgroundColor = veryLightGrey
+            btnText4.textColor = purple
+            btnBack4.layer.borderWidth = mainBorderWidth
+            btnBack4.layer.borderColor = purple.cgColor
+    
+            return 1
+
+            
+        } else if correctAnswer == 2 {
+            
+            btnBack2.backgroundColor = green
+            btnText2.textColor = UIColor.white
+            btnBack2.layer.borderWidth = mainBorderWidth
+            btnBack2.layer.borderColor = green.cgColor
+            // ---
+            btnBack1.backgroundColor = veryLightGrey
+            btnText1.textColor = purple
+            btnBack1.layer.borderWidth = mainBorderWidth
+            btnBack1.layer.borderColor = purple.cgColor
+            btnBack3.backgroundColor = veryLightGrey
+            btnText3.textColor = purple
+            btnBack3.layer.borderWidth = mainBorderWidth
+            btnBack3.layer.borderColor = purple.cgColor
+            btnBack4.backgroundColor = veryLightGrey
+            btnText4.textColor = purple
+            btnBack4.layer.borderWidth = mainBorderWidth
+            btnBack4.layer.borderColor = purple.cgColor
+    
+            return 2
+            
+        } else if correctAnswer == 3 {
+            
+            btnBack3.backgroundColor = green
+            btnText3.textColor = UIColor.white
+            btnBack3.layer.borderWidth = mainBorderWidth
+            btnBack3.layer.borderColor = green.cgColor
+            // ---
+            btnBack2.backgroundColor = veryLightGrey
+            btnText2.textColor = purple
+            btnBack2.layer.borderWidth = mainBorderWidth
+            btnBack2.layer.borderColor = purple.cgColor
+            btnBack1.backgroundColor = veryLightGrey
+            btnText1.textColor = purple
+            btnBack1.layer.borderWidth = mainBorderWidth
+            btnBack1.layer.borderColor = purple.cgColor
+            btnBack4.backgroundColor = veryLightGrey
+            btnText4.textColor = purple
+            btnBack4.layer.borderWidth = mainBorderWidth
+            btnBack4.layer.borderColor = purple.cgColor
+    
+            return 3
+            
+        } else {
+            
+            btnBack4.backgroundColor = green
+            btnText4.textColor = UIColor.white
+            btnBack4.layer.borderWidth = mainBorderWidth
+            btnBack4.layer.borderColor = green.cgColor
+            // ---
+            btnBack2.backgroundColor = veryLightGrey
+            btnText2.textColor = purple
+            btnBack2.layer.borderWidth = mainBorderWidth
+            btnBack2.layer.borderColor = purple.cgColor
+            btnBack3.backgroundColor = veryLightGrey
+            btnText3.textColor = purple
+            btnBack3.layer.borderWidth = mainBorderWidth
+            btnBack3.layer.borderColor = purple.cgColor
+            btnBack1.backgroundColor = veryLightGrey
+            btnText1.textColor = purple
+            btnBack1.layer.borderWidth = mainBorderWidth
+            btnBack1.layer.borderColor = purple.cgColor
+    
+            return 4
+            
+        }
     }
     
     func followGame(){

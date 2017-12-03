@@ -22,6 +22,7 @@ class ClassCell: UITableViewCell {
     @IBOutlet weak var fBack4: UIView!
     @IBOutlet weak var fImg4: UIImageView!
     @IBOutlet weak var teacher: UILabel!
+    @IBOutlet weak var topicCount: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

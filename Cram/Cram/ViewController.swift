@@ -57,11 +57,70 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var friendLiveCount = 20
     var classCount = 20
     var topicsCount = 20
+    var topicsIndex = 0
     var friendsHidden = false
     var purple = UIColor(displayP3Red: 95/255, green: 49/255, blue: 146/255, alpha: 1.0)
     var green = UIColor(displayP3Red: 101/255, green: 195/255, blue: 163/255, alpha: 1.0)
     var lightThemeGrey = UIColor(displayP3Red: 184/255, green: 184/255, blue: 184/255, alpha: 1.0)
     var veryLightGrey = UIColor(displayP3Red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
+    
+    let courseTitles =
+    [
+        "Introduction to Computing and Programming",
+        "Introduction to Computer Science",
+        "Mathematical Tools for Computer Science",
+        "Discrete Mathematics",
+        "Data Structures and Programming Techniques",
+        "Introduction to Systems Programming and Computer Organization",
+        "Algorithms",
+        "Intensive Algorithms",
+        
+        "Intermediate Microeconomics",
+        "Econometrics and Data Analysis",
+        "General Chemistry II",
+        "Natural Disasters",
+        "How To Compare",
+        "University Physics for the Life Sciences",
+        "Elementary Studies in Analysis and Model Composition"
+    ]
+    let courseProfessors =
+    [
+        "Benedict Brown and Natalie Melo",
+        "Stephen Slade",
+        "James Aspnes",
+        "Ross Berkowitz",
+        "Staff",
+        "Dana Angluin",
+        "James Glenn",
+        "Daniel Spielman",
+        
+        "Staff",
+        "Staff",
+        "Charles Schmuttenmaer",
+        "David Bercovici and Maureen Long",
+        "Robyn Creswell and Marta",
+        "Simon Mochrie and Daisuke Nagai",
+        "Staff"
+    ]
+    let courseTopics =
+    [
+        ["Algorithms","Data Structures","Encapsulation","Resource Management","Software Security","Software Engineering","Web Development"],
+        ["Computer Systems","Algorithm Design","Software Complexity","Artificial Intelligence"],
+        ["Propositional Logic","Discrete Mathematics","Linear Algebra"],
+        ["Graphs","Binary Trees","Ramsey Theorem","Enumeration","Binomial Coefficients","Stirling Numbers"],
+        ["Programming in C","Arrays","Stacks","Software Queues","Heaps","Sorting and Searching Software","Storage Allocation and Management","Data Abstraction","Testing and Debugging","Efficient Programs"],
+        ["Machine Architecture","Computer Organization","Systems Programming","Issues in Operating Systems","Software Engineering","Scripting Languages"],
+        ["Greedy Algorithms","Divide and Conquer","Dynamic Programming","Network Flow","NP Completeness and Approximation"],
+        ["Greedy Algorithms","Divide and Conquer","Dynamic Programming","Network Flow","Approximation Algorithms","Randomized Algorithms"],
+        
+        ["The Theory of Choice","Consumer and Firm Behavior","Production","Price Determination","Welfare","Market Failure"],
+        ["Basic Probability Theory and Statistics","Distribution Theory","Estimation and Inference","Bivariate Regression","Introduction to Multivariate Regression","Statistical Computing"],
+        ["Kinetics","Chemical Equilibrium","Acid-Base Chemistry","Free Energy and Entropy","Electrochemistry","Nuclear Chemistry"],
+        ["Earthquakes","Volcanoes","Tsunamis","Landslides","Coastal Flooding","Tornadoes","Hurricanes","Meteoritic Impacts","Hazard Mitigation Strategies"],
+        ["Theories of Translation","Ekphrasis","Proper Use of Archives","The Paintings of Mantegna","The Paintings of Rembrandt","Arabian Nights"],
+        ["Vectors and Kinematics","Newton's Laws","Momentum","Energy","Random Walks","Diffusion","Fluid Mechanics","Mathematical Modeling","Statistical Mechanics"],
+        ["Tonal Harmony","Counterpoint","Phrase Rhythm","Motivic Development","model composition"]
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +162,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if(UserDefaults.standard.value(forKey: "userName") != nil){
             userName = (UserDefaults.standard.value(forKey: "userName") as! String)
         }
+        
+        topicsTableView.tableFooterView = UIView()
+        classTableView.tableFooterView = UIView()
         
         //Launch Facebook Login
         self.loginToFB()
@@ -264,10 +326,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if tableView == topicsTableView {
             
+            topicsCount = courseTopics[topicsIndex].count
             return topicsCount
             
         } else {
             
+            classCount = courseTitles.count
             return classCount
             
         }
@@ -297,10 +361,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let cell = tableView.dequeueReusableCell(withIdentifier: "topicCell", for: indexPath) as! TopicCell
             
             cell.topicImg.image = UIImage(named: "topic\(x)")
+            cell.topicTitle.text = courseTopics[topicsIndex][indexPath.row]
             
             return cell
             
         } else {
+            
+            let random = GKRandomDistribution(lowestValue: 1, highestValue: 6)
+            let x = random.nextInt()
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! ClassCell
             
@@ -308,7 +376,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             backgroundView.backgroundColor = UIColor.clear
             cell.selectedBackgroundView = backgroundView
             
-            cell.mainImg.image = UIImage(named: "class")
+            cell.mainImg.image = UIImage(named: "class\(x)")
+            cell.title.text = courseTitles[indexPath.row]
+            cell.teacher.text = courseProfessors[indexPath.row]
+            cell.topicCount.text = "\(courseTopics[indexPath.row].count)"
             
             return cell
             
@@ -338,6 +409,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
         if tableView == classTableView {
+            
+            topicsIndex = indexPath.row
+            topicsTableView.reloadData()
             
             self.friendLineTrailing.constant = view.frame.size.width
             self.friendViewTrailing.constant = view.frame.size.width

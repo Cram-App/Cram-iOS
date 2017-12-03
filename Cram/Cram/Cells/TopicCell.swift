@@ -13,6 +13,7 @@ class TopicCell: UITableViewCell {
     
     @IBOutlet weak var topicImg: UIImageView!
     @IBOutlet weak var title: NSLayoutConstraint!
+    @IBOutlet weak var topicTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
