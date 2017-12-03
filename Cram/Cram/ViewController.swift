@@ -545,6 +545,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         })
     }
     
+    @IBAction func acceptQuizClicked(_ sender: Any) {
+    }
+    
+    @IBAction func denyQuizClicked(_ sender: Any) {
+        
+        self.denySession()
+        
+        self.popupHeight.constant = 0
+        
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+            self.popupBack.alpha = 0
+            let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+            statusBarWindow?.alpha = 1.0
+        }
+    }
+    
     //Joins game if possible
     func joinSession(gameKey: String){
         
