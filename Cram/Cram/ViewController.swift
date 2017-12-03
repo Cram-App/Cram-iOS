@@ -104,26 +104,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             userName = (UserDefaults.standard.value(forKey: "userName") as! String)
         }
         
-        let when = DispatchTime.now() + 2
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            self.popupHeight.constant = 105
-            
-            UIView.animate(withDuration: 0.25) {
-                
-                self.view.layoutIfNeeded()
-                self.popupBack.alpha = 1
-                
-                let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
-                statusBarWindow?.alpha = 0.0
-                
-            }
-        }
-        
         //Launch Facebook Login
         self.loginToFB()
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         //Update status
@@ -571,7 +554,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     }
     
-    func denySession(){
+    func denySession() {
         if userID != ""{
             print("Session Denied")
             ref.child("users/\(userID)/pendingGames").removeValue()

@@ -48,6 +48,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var totalSecondsCountDown = 10.0
     var gameTimer: Timer!
     var gameLeadboard = [String: (String, Int, Int)]() //id, name, totalPoints, gamePoints
+    var purple = UIColor(displayP3Red: 95/255, green: 49/255, blue: 146/255, alpha: 1.0)
+    var green = UIColor(displayP3Red: 101/255, green: 195/255, blue: 163/255, alpha: 1.0)
+    var lightThemeGrey = UIColor(displayP3Red: 184/255, green: 184/255, blue: 184/255, alpha: 1.0)
+    var veryLightGrey = UIColor(displayP3Red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
     
     var friendLiveCount = 10
     let questions =
@@ -68,6 +72,12 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     [
         userPoints
     ]
+    var mainBorderWidth: CGFloat = 3.0
+    
+    var btn1Selected = false
+    var btn2Selected = false
+    var btn3Selected = false
+    var btn4Selected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +116,25 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 //        }
 
         // Do any additional setup after loading the view.
+        
+        // Initial button styles
+        btnBack1.backgroundColor = UIColor.clear
+        btnText1.textColor = purple
+        btnBack1.layer.borderWidth = mainBorderWidth
+        btnBack1.layer.borderColor = purple.cgColor
+        btnBack2.backgroundColor = UIColor.clear
+        btnText2.textColor = purple
+        btnBack2.layer.borderWidth = mainBorderWidth
+        btnBack2.layer.borderColor = purple.cgColor
+        btnBack3.backgroundColor = UIColor.clear
+        btnText3.textColor = purple
+        btnBack3.layer.borderWidth = mainBorderWidth
+        btnBack3.layer.borderColor = purple.cgColor
+        btnBack4.backgroundColor = UIColor.clear
+        btnText4.textColor = purple
+        btnBack4.layer.borderWidth = mainBorderWidth
+        btnBack4.layer.borderColor = purple.cgColor
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -345,6 +374,48 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         return friendsInGame.count
         
+    }
+    
+    // Button actions
+    @IBAction func buttonOnePressed(_ sender: Any) {
+        
+        if !btn1Selected && !btn2Selected && !btn3Selected && !btn4Selected {
+            btnBack1.backgroundColor = purple
+            btnText1.textColor = UIColor.white
+            btnBack1.layer.borderWidth = mainBorderWidth
+            btnBack1.layer.borderColor = purple.cgColor
+        }
+        btn1Selected = true
+    }
+    
+    @IBAction func buttonTwoPressed(_ sender: Any) {
+        if !btn1Selected && !btn2Selected && !btn3Selected && !btn4Selected {
+            btnBack2.backgroundColor = purple
+            btnText2.textColor = UIColor.white
+            btnBack2.layer.borderWidth = mainBorderWidth
+            btnBack2.layer.borderColor = purple.cgColor
+        }
+        btn2Selected = true
+    }
+    
+    @IBAction func buttonThreePressed(_ sender: Any) {
+        if !btn1Selected && !btn2Selected && !btn3Selected && !btn4Selected {
+            btnBack3.backgroundColor = purple
+            btnText3.textColor = UIColor.white
+            btnBack3.layer.borderWidth = mainBorderWidth
+            btnBack3.layer.borderColor = purple.cgColor
+        }
+        btn3Selected = true
+    }
+    
+    @IBAction func buttonFourPressed(_ sender: Any) {
+        if !btn1Selected && !btn2Selected && !btn3Selected && !btn4Selected {
+            btnBack4.backgroundColor = purple
+            btnText4.textColor = UIColor.white
+            btnBack4.layer.borderWidth = mainBorderWidth
+            btnBack4.layer.borderColor = purple.cgColor
+        }
+        btn4Selected = true
     }
     
     func followGame(){
