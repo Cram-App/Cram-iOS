@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "82B3B7D1F00D00DC6EBA5EFF8EAB6B87"
+               BlueprintIdentifier = "12EF1ED6E72B8EA35C59F59237D459F6"
                BuildableName = "Pods_Cram.framework"
                BlueprintName = "Pods-Cram"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "82B3B7D1F00D00DC6EBA5EFF8EAB6B87"
+            BlueprintIdentifier = "12EF1ED6E72B8EA35C59F59237D459F6"
             BuildableName = "Pods_Cram.framework"
             BlueprintName = "Pods-Cram"
             ReferencedContainer = "container:Pods.xcodeproj">

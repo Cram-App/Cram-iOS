@@ -444,6 +444,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if tableView == topicsTableView {
             
+            print("pressed topic", courseTopics[topicsIndex][indexPath.row])
+            topic = courseTopics[topicsIndex][indexPath.row]
             type = "HOST"
             self.createGame()
             

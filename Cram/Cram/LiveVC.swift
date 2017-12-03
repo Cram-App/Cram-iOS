@@ -16,6 +16,7 @@ import GameKit
 import SwiftyJSON
 
 var type = String()
+var topic = String()
 var gameRef : DatabaseReference!
 //implement type and follow database event
 
@@ -79,6 +80,16 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     [
         "You"
     ]
+    
+    var questionArray = [String]()
+    
+    var bt1 = [String]()
+    var bt2 = [String]()
+    var bt3 = [String]()
+    var bt4 = [String]()
+    
+    var answers = [Int]()
+    
     var friendsInGamePics = [
         UIImage()
     ]
@@ -176,6 +187,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         loaderMessage.textColor = UIColor.white
         loaderMessage.isHidden = true
         view.addSubview(loaderMessage)
+        
+        self.generateQuestions(topic: topic)
         
     }
 
@@ -428,72 +441,20 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         print("type", type)
         if type == "HOST"{
             
-            var questionArray = [
-                    "Select Pig",
-                    "Select Water",
-                    "Select Your Destiny",
-                    "LiveGreen"
-            ]
+            questionArray = [String]()
             
-            var bt1 = ["1",
-                       "1",
-                       "1",
-                       "1"
-            ]
-            var bt2 = ["Pig",
-                       "2",
-                       "2",
-                       "2"
-            ]
-            var bt3 = ["3",
-                       "3",
-                       "Cocaine",
-                       "3"
-            ]
-            var bt4 = ["4",
-                       "Water",
-                       "4",
-                       "LiveGreen"
-            ]
+            bt1 = [String]()
+            bt2 = [String]()
+            bt3 = [String]()
+            bt4 = [String]()
             
-            var answers = [1,3,2,3]
+            var answers = [Int]()
             
-            var questionsDB: [String: Any] = ["titles" : questionArray, "bt1" : bt1, "bt2" : bt2, "bt3" : bt3, "bt4" : bt4, "answers" : answers]
-            
-            gameRef.child("questions").setValue(questionsDB)
-            
-            //creates dalay for NSDate
-            var date = Date()
-            date.addTimeInterval(5)
-            
-            gameRef.child("startingDate").setValue(date.timeIntervalSince1970)
+            self.generateQuestions(topic: topic)
         } else {
             
             self.dismiss(animated: true, completion: nil)
         }
-        
-    }
-    
-    func generateQuestions() {
-//        var questionArray = [String]()
-//        var answerIndexArray = [Int]()
-//        var buttonOneArray = [String]()
-//        var buttonTwoArray = [String]()
-//        var buttonThreeArray = [String]()
-//        var buttonFourArray = [String]()
-//
-//        for x in 0..<5{
-//            questionArray.append("Question number \(x) ?")
-//
-//            buttonOneArray.append("Cell One")
-//            buttonTwoArray.append("Cell Two")
-//            buttonThreeArray.append("Cell Three")
-//            buttonFourArray.append("Cell Four")
-//
-//            answerIndexArray.append(0)
-//        }
-        
-        
         
     }
    
@@ -762,26 +723,72 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func generateQuestions(topic: String) -> Void {
         //        let url = "https://cram.heroku.com/questions?topic=\(topic)"
         
-        guard let queryURL = URL(string: "http://cram.herokuapp.com/questions?topic=\(topic)") else {return}
+        print("topic", topic)
+        let joinedTopic = topic.replacingOccurrences(of: " ", with: "%20")
+        print("joinedTopic", joinedTopic)
+        if let queryURL =  URL(string: "https://cram.herokuapp.com/questions?topic=\(joinedTopic)"){
         
         let session = URLSession.shared
         session.dataTask(with: queryURL) { (data, response, error) in
             if let response = response {
-                print(response)
+                print("response", response)
             }
             if let data = data {
+                print("data", data)
                 //do {
                 let json = JSON(data)
                 let qCount = json.count
                 var i = 0
                 print(qCount)
-                //                print(json[0])
+                print(json[0])
                 self.questions = []
                 while i < qCount {
                     if (json[i]["similar_words"].count >= 3) {
                         //                        print(json[i])
                         let question = json[i]["question"]
+                        
+                        let answer = json[i]["answer"]
+                        
+                        let diceRoll = Int(arc4random_uniform(UInt32(4)))
+                        
+                        if diceRoll == 0{
+                            self.bt1.append(answer.string!)
+                            self.bt2.append(json[i]["similar_words"][0].string!)
+                            self.bt3.append(json[i]["similar_words"][1].string!)
+                            self.bt4.append(json[i]["similar_words"][2].string!)
+                        }
+                        else if diceRoll == 1{
+                            self.bt1.append(json[i]["similar_words"][0].string!)
+                            self.bt2.append(answer.string!)
+                            self.bt3.append(json[i]["similar_words"][1].string!)
+                            self.bt4.append(json[i]["similar_words"][2].string!)
+                        }
+                        else if diceRoll == 2{
+                            self.bt1.append(json[i]["similar_words"][1].string!)
+                            self.bt2.append(json[i]["similar_words"][0].string!)
+                            self.bt3.append(answer.string!)
+                            self.bt4.append(json[i]["similar_words"][2].string!)
+                        }
+                        else if diceRoll == 3{
+                            self.bt1.append(json[i]["similar_words"][2].string!)
+                            self.bt2.append(json[i]["similar_words"][0].string!)
+                            self.bt3.append(json[i]["similar_words"][1].string!)
+                            self.bt4.append(answer.string!)
+                        }
+                        
+                        self.questionArray.append(question.string!)
+                        
+                        self.answers.append(diceRoll)
+                        
+                        
+                        print("question", question)
+                        print("answer", answer)
+                        //self.questions.append(question)
+                    
+
+                        
                         print(question)
+                        
                         
                         
                         //                        self.questions.append(self.jsonToString(json: q as AnyObject))
@@ -789,30 +796,22 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     i += 1
                 }
                 
+                let questionsDB: [String: Any] = ["titles" : self.questionArray, "bt1" : self.bt1, "bt2" : self.bt2, "bt3" : self.bt3, "bt4" : self.bt4, "answers" : self.answers]
+                
+                gameRef.child("questions").setValue(questionsDB)
+                
+                //creates dalay for NSDate
+                var date = Date()
+                date.addTimeInterval(5)
+                
+                gameRef.child("startingDate").setValue(date.timeIntervalSince1970)
+                
             }
             }.resume()
-        
-        
-        
-        
-        //        var questionArray = [String]()
-        //        var answerIndexArray = [Int]()
-        //        var buttonOneArray = [String]()
-        //        var buttonTwoArray = [String]()
-        //        var buttonThreeArray = [String]()
-        //        var buttonFourArray = [String]()
-        //
-        //        for x in 0..<5{
-        //            questionArray.append("Question number \(x) ?")
-        //
-        //            buttonOneArray.append("Cell One")
-        //            buttonTwoArray.append("Cell Two")
-        //            buttonThreeArray.append("Cell Three")
-        //            buttonFourArray.append("Cell Four")
-        //
-        //            answerIndexArray.append(0)
-        //        }
-        
+        }
+        else{
+            print("string to url error")
+        }
         
         
     }
