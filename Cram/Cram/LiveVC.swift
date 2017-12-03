@@ -48,6 +48,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var gameID: UILabel!
     
+    var gamePoints = 0
     var totalSecondsCountDown = 10.0
     var gameTimer: Timer!
     var gameLeadboard = [String: (String, Int, Int)]() //id, name, totalPoints, gamePoints
@@ -56,7 +57,6 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var lightThemeGrey = UIColor(displayP3Red: 184/255, green: 184/255, blue: 184/255, alpha: 1.0)
     var veryLightGrey = UIColor(displayP3Red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
     
-    var friendLiveCount = 10
     let questions =
     [
         "This is a question that was generated automatically from a course video lecture! ONE",
@@ -83,6 +83,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var btn4Selected = false
     var activityIndicatorView = UIActivityIndicatorView()
     var loaderMessage = UILabel()
+    
+    var pointsEarned = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,6 +139,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         activityIndicatorView.isHidden = true
         view.addSubview(activityIndicatorView)
+        
+        self.leadPoints.text = "\(userPoints)"
         
         loaderMessage.frame = CGRect(x: 40, y: activityIndicatorView.frame.maxY + 15, width: view.frame.size.width - 80, height: 50)
         loaderMessage.numberOfLines = 0
@@ -204,12 +208,13 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return friendLiveCount
+        return self.gameLeadboard.count
     }
     
     func inGame(index: Int) {
         
         if index == questions.count {
+            saveProfile()
             return
         }
         
@@ -233,8 +238,15 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             
             if rightAnswer == 1 && self.btn1Selected || rightAnswer == 2 && self.btn2Selected
                 || rightAnswer == 3 && self.btn3Selected || rightAnswer == 4 && self.btn4Selected {
+                
+                self.gamePoints += self.pointsEarned
+                gameRef.child("leadboard/\(userID)/gamePoints").setValue(self.gamePoints)
+                userPoints += self.pointsEarned
+                self.leadPoints.text = "\(self.gamePoints)"
+                
                 self.answerStatus.image = UIImage(named: "check")
             } else {
+                self.pointsEarned = 0
                 self.answerStatus.image = UIImage(named: "wrong")
             }
             
@@ -280,17 +292,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @objc func startLoading(){
         
-        // Shows countdown after loader and starts game
-        
-        for subview in self.waitingRoomBackView.subviews {
-            subview.isHidden = true
-        }
-        
-        activityIndicatorView.startAnimating()
-        activityIndicatorView.isHidden = false
-        loaderMessage.text = "Converting your lecture into a fun quiz, hang tight!"
-        loaderMessage.isHidden = false
-        
+        //Stops Loading and loads quiz
         let when = DispatchTime.now() + 5
         DispatchQueue.main.asyncAfter(deadline: when) {
             
@@ -493,8 +495,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             btnText1.textColor = UIColor.white
             btnBack1.layer.borderWidth = mainBorderWidth
             btnBack1.layer.borderColor = purple.cgColor
-        }
         btn1Selected = true
+            
+            pointsEarned = Int(self.totalSecondsCountDown)
+        }
     }
     
     @IBAction func buttonTwoPressed(_ sender: Any) {
@@ -503,8 +507,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             btnText2.textColor = UIColor.white
             btnBack2.layer.borderWidth = mainBorderWidth
             btnBack2.layer.borderColor = purple.cgColor
-        }
         btn2Selected = true
+            
+            pointsEarned = Int(self.totalSecondsCountDown)
+        }
     }
     
     @IBAction func buttonThreePressed(_ sender: Any) {
@@ -513,8 +519,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             btnText3.textColor = UIColor.white
             btnBack3.layer.borderWidth = mainBorderWidth
             btnBack3.layer.borderColor = purple.cgColor
-        }
         btn3Selected = true
+            
+            pointsEarned = Int(self.totalSecondsCountDown)
+        }
     }
     
     @IBAction func buttonFourPressed(_ sender: Any) {
@@ -523,8 +531,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             btnText4.textColor = UIColor.white
             btnBack4.layer.borderWidth = mainBorderWidth
             btnBack4.layer.borderColor = purple.cgColor
-        }
         btn4Selected = true
+            
+            pointsEarned = Int(self.totalSecondsCountDown)
+        }
     }
     
     func resetButtons() {
@@ -670,6 +680,18 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         
                         Timer.scheduledTimer(timeInterval: TimeInterval(date.timeIntervalSinceNow), target: self, selector: #selector(self.startLoading), userInfo: nil, repeats: false)
                         
+                        
+                        // Starts Loader
+                        for subview in self.waitingRoomBackView.subviews {
+                            subview.isHidden = true
+                        }
+                        
+                        self.activityIndicatorView.startAnimating()
+                        self.activityIndicatorView.isHidden = false
+                        self.loaderMessage.text = "Converting your lecture into a fun quiz, hang tight!"
+                        self.loaderMessage.isHidden = false
+                        
+                        
                     }
                     
                     
@@ -677,7 +699,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         print("Game Leadboard", leadboard)
                         
 
-                        if leadboard.count != self.gameLeadboard.count{
+                        if (leadboard.count - 1) != self.gameLeadboard.count{
                             //for x in (leadboard.count - self.gameLeadboard.count)..<leadboard.count{ }
                             //Possible way to properly create animations
                             self.gameLeadboard = [String: (String, Int, Int)]()
@@ -698,23 +720,29 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                                     }
                                 }
                             }
+                            self.liveCollectionView.reloadData()
+                        }
+                        
+                        for friend in self.gameLeadboard{
+                            
+                            if self.gameLeadboard[friend.key] == nil{
+                                
+                                let when = DispatchTime.now() + 3
+                                let picUrl = URL(string: "https://graph.facebook.com/\(friend.key)/picture?type=large")
+                                let friendPic = UIImageView()
+                                friendPic.sd_setImage(with: picUrl)
+                                let friendName = friend.value.0
+                                let friendTP = friend.value.1
+                                DispatchQueue.main.asyncAfter(deadline: when) {
+                                    
+                                    self.addFriend(name: friendName, pic: friendPic.image!, points: friendTP)
+                                    
+                                }
+                            }
                         }
 
                     }
                     
-                    for friend in self.gameLeadboard{
-                        let when = DispatchTime.now() + 3
-                        let picUrl = URL(string: "https://graph.facebook.com/\(friend.key)/picture?type=large")
-                        let friendPic = UIImageView()
-                        friendPic.sd_setImage(with: picUrl)
-                        let friendName = friend.value.0
-                        let friendTP = friend.value.1
-                        DispatchQueue.main.asyncAfter(deadline: when) {
-                            
-                            self.addFriend(name: friendName, pic: friendPic.image!, points: friendTP)
-                            
-                        }
-                    }
 
                 }
                 

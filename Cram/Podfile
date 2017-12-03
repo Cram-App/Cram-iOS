@@ -20,5 +20,8 @@ target 'Cram' do
   #SDImage
     pod 'SDWebImage'
     pod 'SDWebImage/WebP'
+    
+  #Swifty
+    pod 'SwiftyJSON'
 
 end

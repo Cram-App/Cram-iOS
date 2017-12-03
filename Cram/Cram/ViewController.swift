@@ -240,7 +240,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 print("User Name", _facebookName)
                 print("User Id", _facebookId)
                 
-                self.saveProfile()
+                saveProfile()
                 self.updateDBValues()
                 self.observeUserDB()
             }
@@ -278,12 +278,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func saveFriends(){
         UserDefaults.standard.setValue(friendsInGame, forKey: "friendsInGame")
-    }
-    
-    func saveProfile(){
-        UserDefaults.standard.setValue(userID, forKey: "userID")
-        UserDefaults.standard.setValue(userName, forKey: "userName")
-        UserDefaults.standard.setValue(userPoints, forKey: "userPoints")
     }
     
     func updateDBValues(){
@@ -554,7 +548,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     }
                 }
                 
-                self.saveProfile()
+                saveProfile()
                 
             }
         })
@@ -649,6 +643,12 @@ extension UIView {
             self.alpha = 0.0
         }, completion: completion)
     }
+}
+
+func saveProfile(){
+    UserDefaults.standard.setValue(userID, forKey: "userID")
+    UserDefaults.standard.setValue(userName, forKey: "userName")
+    UserDefaults.standard.setValue(userPoints, forKey: "userPoints")
 }
 
 
