@@ -192,8 +192,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func startGameBtnClicked(_ sender: Any) {
         
-        // Starts game
-        // waitingRoomBackView.isHidden = true
+        // Shows countdown
         
         for subview in waitingRoomBackView.subviews {
             subview.isHidden = true
@@ -211,9 +210,51 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         UIView.animate(withDuration: 1.0) {
             self.countdownLabel.transform = .identity
+            
         }
         
-        //self.inGame(index: 0)
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.countdownLabel.text = "2"
+            
+            var bounds = self.countdownLabel.bounds
+            self.countdownLabel.font = self.countdownLabel.font.withSize(200)
+            bounds.size = self.countdownLabel.intrinsicContentSize
+            self.countdownLabel.bounds = bounds
+            let scaleX = CGFloat(0.25)
+            let scaleY = CGFloat(0.25)
+            self.countdownLabel.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+            
+            UIView.animate(withDuration: 1.0) {
+                self.countdownLabel.transform = .identity
+                
+            }
+        }
+        
+        let whenTwo = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: whenTwo) {
+            
+            self.countdownLabel.text = "1"
+            
+            var bounds = self.countdownLabel.bounds
+            self.countdownLabel.font = self.countdownLabel.font.withSize(200)
+            bounds.size = self.countdownLabel.intrinsicContentSize
+            self.countdownLabel.bounds = bounds
+            let scaleX = CGFloat(0.25)
+            let scaleY = CGFloat(0.25)
+            self.countdownLabel.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+            
+            UIView.animate(withDuration: 1.0) {
+                self.countdownLabel.transform = .identity
+                
+            }
+            
+            // Starts game
+            self.waitingRoomBackView.isHidden = true
+            self.inGame(index: 0)
+        }
+        
     }
 
     @IBAction func cancelGameBtnClicked(_ sender: Any) {
