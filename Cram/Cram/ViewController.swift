@@ -38,12 +38,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var classTableViewLeading: NSLayoutConstraint!
     @IBOutlet weak var friendLineLeading: NSLayoutConstraint!
     @IBOutlet weak var friendViewLeading: NSLayoutConstraint!
+    @IBOutlet weak var mainPointsLabel: UILabel!
     
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var mainSubtitle: UILabel!
     @IBOutlet weak var backArrowBtn: UIButton!
     @IBOutlet weak var backArrowImg: UIImageView!
     @IBOutlet weak var mainTitleLeading: NSLayoutConstraint!
+    
+    // Popup
+    @IBOutlet weak var popupBack: UIView!
+    @IBOutlet weak var popupImg: UIImageView!
+    @IBOutlet weak var popupTitle: UILabel!
+    @IBOutlet weak var acceptBtnBack: UIView!
+    @IBOutlet weak var denyBtnBack: UIView!
+    @IBOutlet weak var popupHeight: NSLayoutConstraint!
     
     var friendLiveCount = 20
     var classCount = 20
@@ -57,6 +66,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        popupHeight.constant = 0
+        popupBack.alpha = 0
+        
         friendsCollectionView.delegate = self
         friendsCollectionView.dataSource = self
         classTableView.delegate = self
@@ -68,14 +80,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         backArrowBtn.isHidden = true
         backArrowImg.isHidden = true
         
+        popupImg.layer.cornerRadius = popupImg.frame.size.width / 2
+        acceptBtnBack.layer.cornerRadius = acceptBtnBack.frame.size.height / 2
+        denyBtnBack.layer.cornerRadius = denyBtnBack.frame.size.height / 2
+        popupImg.layer.masksToBounds = true
+        
         let maskPath: UIBezierPath = UIBezierPath(roundedRect: self.downView.bounds, byRoundingCorners: ([.bottomLeft, .bottomRight]), cornerRadii: CGSize(6, 6))
         let maskLayer: CAShapeLayer = CAShapeLayer()
         maskLayer.frame = self.downView.bounds
         maskLayer.path = maskPath.cgPath
         self.downView.layer.mask = maskLayer
-        // Do any additional setup loading the view, typically from a nib.
         
-        if(UserDefaults.standard.value(forKey: "friendsInGame") != nil){
+        if (UserDefaults.standard.value(forKey: "friendsInGame") != nil){
             friendsInGame = (UserDefaults.standard.value(forKey: "friendsInGame") as! [String])
         }
         if(UserDefaults.standard.value(forKey: "userID") != nil){
@@ -88,9 +104,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             userName = (UserDefaults.standard.value(forKey: "userName") as! String)
         }
         
+        let when = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.popupHeight.constant = 105
+            
+            UIView.animate(withDuration: 0.25) {
+                
+                self.view.layoutIfNeeded()
+                self.popupBack.alpha = 1
+                
+                let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+                statusBarWindow?.alpha = 0.0
+                
+            }
+        }
+        
         //Launch Facebook Login
         self.loginToFB()
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         //Update status
@@ -118,7 +151,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return
     }
     
-    func loginToFB(){
+    func loginToFB() {
         
         //Facebook Account Token
         let accessToken = FBSDKAccessToken.current()
@@ -275,7 +308,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if tableView == topicsTableView {
             
-            let random = GKRandomDistribution(lowestValue: 1, highestValue: 4)
+            let random = GKRandomDistribution(lowestValue: 1, highestValue: 6)
             let x = random.nextInt()
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "topicCell", for: indexPath) as! TopicCell
@@ -304,6 +337,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         print("CLICKED")
         
+        if self.popupHeight.constant > 0 {
+            // Close popup while switching pages
+            
+            self.popupHeight.constant = 0
+            
+            UIView.animate(withDuration: 0.25) {
+                
+                self.view.layoutIfNeeded()
+                self.popupBack.alpha = 0
+                
+                let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+                statusBarWindow?.alpha = 1.0
+                
+            }
+            
+        }
+        
         if tableView == classTableView {
             
             self.friendLineTrailing.constant = view.frame.size.width
@@ -318,7 +368,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             backArrowBtn.isHidden = false
             backArrowImg.isHidden = false
             
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.25) {
                 
                 self.view.layoutIfNeeded()
                 self.friendLine.alpha = 0
@@ -362,7 +412,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         self.friendSectionHeight.constant = 100
         self.friendLineHeight.constant = 1
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
     }
@@ -373,7 +423,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         self.friendSectionHeight.constant = 0
         self.friendLineHeight.constant = 0
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
         
@@ -393,7 +443,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         backArrowBtn.isHidden = true
         backArrowImg.isHidden = true
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.25) {
             
             self.view.layoutIfNeeded()
             self.friendLine.alpha = 1
@@ -428,6 +478,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     //Execute Pending Game
                     //Popup Joining Section
                     print("Invited For Game Session: ", data["pendingGames"] as! String )
+                    
+                    self.popupHeight.constant = 105
+                    
+                    UIView.animate(withDuration: 0.5) {
+                        
+                        self.view.layoutIfNeeded()
+                        self.popupBack.alpha = 1
+                        
+                        let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+                        statusBarWindow?.alpha = 0.0
+                        
+                    }
                 }
                 
                 self.saveProfile()
@@ -496,7 +558,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if userID != ""{
             print("Session Denied")
             ref.child("users/\(userID)/pendingGames").removeValue()
-            //Close Popup
         }
     }
 }
