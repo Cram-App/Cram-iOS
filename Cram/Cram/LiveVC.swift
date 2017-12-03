@@ -248,6 +248,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if indexPath.row < friendsInMatchID.count{
             let friendUrl = URL(string: "https://graph.facebook.com/\(friendsInMatchID[indexPath.row])/picture?type=large")
             cell.cellImg.sd_setImage(with: friendUrl)
+            cell.points.text = "LIVE"
             
             if friendsInMatchName[indexPath.row] != ""{
                 cell.cellName.text = String(friendsInMatchName[indexPath.row].split(separator: " ").first!)
