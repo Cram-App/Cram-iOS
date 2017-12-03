@@ -52,7 +52,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var startGameBtnText: UILabel!
     @IBOutlet weak var cancelGameBtn: UIButton!
     
-    
+    var friendsInMatchID = [String]()
+    var friendsInMatchName = [String]()
     var gameInitialized = false
     
     var gamePoints = 0
@@ -178,6 +179,8 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         view.addSubview(activityIndicatorView)
         
         self.leadPoints.text = "\(userPoints)"
+        let picUrl = URL(string: "https://graph.facebook.com/\(userID)/picture?type=large")
+        self.leadImg.sd_setImage(with: picUrl)
         
         loaderMessage.frame = CGRect(x: 40, y: activityIndicatorView.frame.maxY + 15, width: view.frame.size.width - 80, height: 50)
         loaderMessage.numberOfLines = 0
@@ -187,8 +190,6 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         loaderMessage.textColor = UIColor.white
         loaderMessage.isHidden = true
         view.addSubview(loaderMessage)
-        
-        self.generateQuestions(topic: topic)
         
     }
 
@@ -243,7 +244,20 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "liveCell", for: indexPath) as! LiveCell
-        cell.cellImg.image = UIImage(named: "zucc")
+        
+        if indexPath.row < friendsInMatchID.count{
+            let friendUrl = URL(string: "https://graph.facebook.com/\(friendsInMatchID[indexPath.row])/picture?type=large")
+            cell.cellImg.sd_setImage(with: friendUrl)
+            
+            if friendsInMatchName[indexPath.row] != nil{
+                cell.cellName.text = friendsInMatchName[indexPath.row]
+            }
+        }
+        else{
+            cell.cellImg.image = UIImage(named: "topic3")
+        }
+        
+        
         cell.cellBack.layer.masksToBounds = true
         cell.cellImg.layer.masksToBounds = true
         cell.cellBack.layer.cornerRadius = 6
@@ -278,6 +292,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
         else{
         
+        if index < buttonOneArray.count{
         //Question Set up
         self.questionCountText.text = "\(index + 1)/\(questions.count)"
         self.questionText.text = questions[index]
@@ -356,7 +371,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 }
             }
         }
-        
+        }
     }
     
     @objc func startLoading(){
@@ -521,7 +536,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "joinedFriend", for: indexPath) as! JoinedFriend
         cell.backgroundColor = UIColor.white
-        cell.friendName.text = "\(friendsInGame[indexPath.row]) joined!"
+        cell.friendName.text = "\(friendsInGame[indexPath.row].split(separator: " ").first!) joined!"
         
         if indexPath.row == 0{
             let picUrl = URL(string: "https://graph.facebook.com/\(userID)/picture?type=large")
@@ -876,8 +891,12 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                             //Possible way to properly create animations
                             self.gameLeadboard = [String: (String, Int, Int)]()
                             
+                            self.friendsInMatchID = [String]()
+                            self.friendsInMatchName = [String]()
+                            
                             for friend in leadboard{
                                 if friend.key != userID{
+                        
                                     let friendData = friend.value as! [String: Any]
                                     
                                     if let friendName = friendData["name"] as? String,
@@ -886,10 +905,15 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                                     
                                         //// id: (name, totalPoints, gamePoints)
                                         self.gameLeadboard[friend.key] = (friendName, friendGP, friendTP)
+                                        
+                                        self.friendsInMatchID.append(friend.key)
+                                        self.friendsInMatchName.append(friendName)
                                     }
                                     else{
                                         print("incorrect friend style")
                                     }
+                                    
+    
                                 }
                             }
                             self.liveCollectionView.reloadData()
