@@ -374,8 +374,6 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             var date = Date()
             date.addTimeInterval(5)
             
-            Timer.scheduledTimer(timeInterval: TimeInterval(date.timeIntervalSinceNow), target: self, selector: #selector(self.startLoading), userInfo: nil, repeats: false)
-            
             gameRef.child("startingDate").setValue(date.timeIntervalSince1970)
         }
         
