@@ -232,7 +232,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             }
         }
         
-        let whenTwo = DispatchTime.now() + 3
+        let whenTwo = DispatchTime.now() + 2
         DispatchQueue.main.asyncAfter(deadline: whenTwo) {
             
             self.countdownLabel.text = "1"
@@ -249,6 +249,11 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.countdownLabel.transform = .identity
                 
             }
+
+        }
+        
+        let whenThree = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: whenThree) {
             
             // Starts game
             self.waitingRoomBackView.isHidden = true
