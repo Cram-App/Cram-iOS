@@ -60,13 +60,18 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var lightThemeGrey = UIColor(displayP3Red: 184/255, green: 184/255, blue: 184/255, alpha: 1.0)
     var veryLightGrey = UIColor(displayP3Red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
     
-    let questions =
+    var questions =
     [
         "This is a question that was generated automatically from a course video lecture! ONE",
         "This is a question that was generated automatically from a course video lecture! TWO",
         "This is a question that was generated automatically from a course video lecture! THREE",
         "This is a question that was generated automatically from a course video lecture! FOUR"
     ]
+    var answerIndexArray = [Int]()
+    var buttonOneArray = [String]()
+    var buttonTwoArray = [String]()
+    var buttonThreeArray = [String]()
+    var buttonFourArray = [String]()
     var friendsInGame =
     [
         "You"
@@ -256,23 +261,31 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             return
         }
         
+        //Question Set up
+        self.questionCountText.text = "\(index + 1)/\(questions.count)"
+        self.questionText.text = questions[index]
+        
+        self.btnText1.text = buttonOneArray[index]
+        self.btnText2.text = buttonTwoArray[index]
+        self.btnText3.text = buttonThreeArray[index]
+        self.btnText4.text = buttonFourArray[index]
+        
         //Fade In
         self.questionText.fadeIn()
         self.questionCountText.fadeIn()
+        
         self.btnText1.fadeIn()
         self.btnText2.fadeIn()
         self.btnText3.fadeIn()
         self.btnText4.fadeIn()
         
-        questionCountText.text = "\(index + 1)/\(questions.count)"
-        questionText.text = questions[index]
         startCountDownTimer()
         
         let when = DispatchTime.now() + 10
         DispatchQueue.main.asyncAfter(deadline: when) {
             
             // Get right answer and animate the status
-            let rightAnswer = self.showCorrectAnswer()
+            let rightAnswer = self.showCorrectAnswer(index: index)
             
             if rightAnswer == 1 && self.btn1Selected || rightAnswer == 2 && self.btn2Selected
                 || rightAnswer == 3 && self.btn3Selected || rightAnswer == 4 && self.btn4Selected {
@@ -281,6 +294,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 gameRef.child("leadboard/\(userID)/gamePoints").setValue(self.gamePoints)
                 userPoints += self.pointsEarned
                 self.leadPoints.text = "\(self.gamePoints)"
+                saveProfile()
                 
                 self.answerStatus.image = UIImage(named: "check")
             } else {
@@ -409,6 +423,40 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         print("type", type)
         if type == "HOST"{
+            
+            var questionArray = [
+                    "This is a question that was generated automatically from a course video lecture! ONE",
+                    "This is a question that was generated automatically from a course video lecture! TWO",
+                    "This is a question that was generated automatically from a course video lecture! THREE",
+                    "This is a question that was generated automatically from a course video lecture! FOUR"
+            ]
+            
+            var bt1 = ["1",
+                       "1",
+                       "1",
+                       "1"
+            ]
+            var bt2 = ["2",
+                       "2",
+                       "2",
+                       "2"
+            ]
+            var bt3 = ["3",
+                       "3",
+                       "3",
+                       "3"
+            ]
+            var bt4 = ["4",
+                       "4",
+                       "4",
+                       "4"
+            ]
+            
+            var answers = [1,0,2,2]
+            
+            var questionsDB: [String: Any] = ["titles" : questionArray, "bt1" : bt1, "bt2" : bt2, "bt3" : bt3, "bt4" : bt4, "answers" : answers]
+            
+            gameRef.child("questions").setValue(questionsDB)
             
             //creates dalay for NSDate
             var date = Date()
@@ -609,11 +657,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         btnBack4.layer.borderColor = purple.cgColor
     }
     
-    func showCorrectAnswer() -> Int {
+    func showCorrectAnswer(index: Int) -> Int {
         
-        // Generates a random answer for now
-        let random = GKRandomDistribution(lowestValue: 1, highestValue: 4)
-        let correctAnswer = random.nextInt()
+        // Compares Selected Cell with right answer
+        let correctAnswer = answerIndexArray[index]
         
         if correctAnswer == 1 {
             
@@ -703,8 +750,9 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             btnBack1.layer.borderColor = purple.cgColor
     
             return 4
+            }
             
-        }
+        
     }
     
     func followGame(){
@@ -741,10 +789,22 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         
                     }
                     
+                    if let questionData = data["questions"] as? [String: Any]{
+                        print("questions")
+                        print(questionData["titles"] as! [String])
+                        self.questions = questionData["titles"] as! [String]
+                        self.buttonOneArray = questionData["bt1"] as! [String]
+                        self.buttonTwoArray = questionData["bt2"] as! [String]
+                        self.buttonThreeArray = questionData["bt3"] as! [String]
+                        self.buttonFourArray = questionData["bt4"] as! [String]
+                        self.answerIndexArray = questionData["answers"] as! [Int]
+                        
+                    }
+                    
                     
                     if let leadboard = data["leadboard"] as? [String : Any]{
                         print("Game Leadboard", leadboard)
-                        
+                        self.gameLeadboard = [String: (String, Int, Int)]()
 
                         if (leadboard.count - 1) != self.gameLeadboard.count{
                             //for x in (leadboard.count - self.gameLeadboard.count)..<leadboard.count{ }
@@ -769,23 +829,17 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                             }
                             self.liveCollectionView.reloadData()
                         }
+                    }
+                    for friend in self.gameLeadboard{
                         
-                        for friend in self.gameLeadboard{
-                            
-                            if self.gameLeadboard[friend.key] == nil{
-                                
-                                let when = DispatchTime.now() + 3
-                                let picUrl = URL(string: "https://graph.facebook.com/\(friend.key)/picture?type=large")
-                                let friendPic = UIImageView()
-                                friendPic.sd_setImage(with: picUrl)
-                                let friendName = friend.value.0
-                                let friendTP = friend.value.1
-                                DispatchQueue.main.asyncAfter(deadline: when) {
-                                    
-                                    self.addFriend(name: friendName, pic: friendPic.image!, points: friendTP)
-                                    
-                                }
-                            }
+                        let when = DispatchTime.now() + 3
+                        let picUrl = URL(string: "https://graph.facebook.com/\(friend.key)/picture?type=large")
+                        let friendPic = UIImageView()
+                        friendPic.sd_setImage(with: picUrl)
+                        let friendName = friend.value.0
+                        let friendTP = friend.value.1
+                        DispatchQueue.main.asyncAfter(deadline: when) {
+                        self.addFriend(name: friendName, pic: friendPic.image!, points: friendTP)
                         }
 
                     }
