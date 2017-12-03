@@ -47,6 +47,9 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var waitingRoomBackView: UIView!
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var gameID: UILabel!
+    @IBOutlet weak var startGameBtnText: UILabel!
+    @IBOutlet weak var cancelGameBtn: UIButton!
+    
     
     var gamePoints = 0
     var totalSecondsCountDown = 10.0
@@ -84,6 +87,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var activityIndicatorView = UIActivityIndicatorView()
     var loaderMessage = UILabel()
     
+    var pointsEarned = 0
     // Question results
     @IBOutlet weak var questionWinner: UIView!
     @IBOutlet weak var questionWinnerImg: UIImageView!
@@ -185,6 +189,17 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         
         self.followGame()
+        
+        if type == "HOST" {
+            
+            startGameBtnText.text = "Start game!"
+            cancelGameBtn.isHidden = false
+            
+        } else {
+            
+            startGameBtnText.text = "Exit game"
+            cancelGameBtn.isHidden = true
+        }
  
     }
     
@@ -228,6 +243,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func inGame(index: Int) {
         
         if index == questions.count {
+            saveProfile()
             
             for subview in questionBack.subviews {
                 if subview != questionWinner {
@@ -283,6 +299,14 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             let whenIn = DispatchTime.now() + 5
             DispatchQueue.main.asyncAfter(deadline: whenIn) {
                 
+                // Reset the answer status
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.answerStatus.alpha = 0.0
+                    let scaleX = CGFloat(0.5)
+                    let scaleY = CGFloat(0.5)
+                    self.answerStatus.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+                }, completion: nil)
+                
                 self.timer.animate(fromAngle: self.timer.angle, toAngle: 0.0, duration: 1.0, completion: nil)
                 self.totalSecondsCountDown = 10.0 + 1.0
                 
@@ -295,14 +319,6 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.btnText4.fadeOut()
                 
                 self.resetButtons()
-                
-                // Reset the answer status
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.answerStatus.alpha = 0.0
-                    let scaleX = CGFloat(0.5)
-                    let scaleY = CGFloat(0.5)
-                    self.answerStatus.transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
-                }, completion: nil)
                 
                 self.inGame(index: index + 1)
                 
@@ -399,6 +415,9 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             date.addTimeInterval(5)
             
             gameRef.child("startingDate").setValue(date.timeIntervalSince1970)
+        } else {
+            
+            self.dismiss(animated: true, completion: nil)
         }
         
     }
