@@ -201,10 +201,10 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
     }
     
-    @IBAction func startGameBtnClicked(_ sender: Any) {
+    @objc func startLoading(){
         
+        print("start loading called")
         // Shows countdown
-        
         for subview in waitingRoomBackView.subviews {
             subview.isHidden = true
         }
@@ -260,7 +260,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.countdownLabel.transform = .identity
                 
             }
-
+            
         }
         
         let whenThree = DispatchTime.now() + 3
@@ -270,6 +270,45 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             self.waitingRoomBackView.isHidden = true
             self.inGame(index: 0)
         }
+        
+    }
+    
+    @IBAction func startGameBtnClicked(_ sender: Any) {
+        
+        print("type", type)
+        if type == "HOST"{
+            
+            //creates dalay for NSDate
+            var date = Date()
+            date.addTimeInterval(5)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(date.timeIntervalSinceNow), target: self, selector: #selector(self.startLoading), userInfo: nil, repeats: false)
+            
+            gameRef.child("startingDate").setValue(date.timeIntervalSince1970)
+        }
+        
+    }
+    
+    func generateQuestions(){
+//        var questionArray = [String]()
+//        var answerIndexArray = [Int]()
+//        var buttonOneArray = [String]()
+//        var buttonTwoArray = [String]()
+//        var buttonThreeArray = [String]()
+//        var buttonFourArray = [String]()
+//
+//        for x in 0..<5{
+//            questionArray.append("Question number \(x) ?")
+//
+//            buttonOneArray.append("Cell One")
+//            buttonTwoArray.append("Cell Two")
+//            buttonThreeArray.append("Cell Three")
+//            buttonFourArray.append("Cell Four")
+//
+//            answerIndexArray.append(0)
+//        }
+        
+        
         
     }
 
@@ -350,6 +389,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func followGame(){
+        
         if gameRef != nil{
             gameRef.observe(.value, with: {(snapshot) in
 
@@ -360,7 +400,17 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 else{
                     print("Game Changed")
                     var data  = snapshot.value! as! [String: Any]
-
+                    
+                    if let timeSince1970 = data["startingDate"] as? Double {
+                        
+                        //creates dalay for NSDate
+                        let date = Date(timeIntervalSince1970: timeSince1970)
+                        
+                        Timer.scheduledTimer(timeInterval: TimeInterval(date.timeIntervalSinceNow), target: self, selector: #selector(self.startLoading), userInfo: nil, repeats: false)
+                        
+                    }
+                    
+                    
                     if let leadboard = data["leadboard"] as? [String : Any]{
                         print("Game Leadboard", leadboard)
                         
