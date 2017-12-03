@@ -94,6 +94,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if (UserDefaults.standard.value(forKey: "friendsInGame") != nil){
             friendsInGame = (UserDefaults.standard.value(forKey: "friendsInGame") as! [String])
         }
+        if(UserDefaults.standard.value(forKey: "userID") != nil){
+            userID = (UserDefaults.standard.value(forKey: "userID") as! String)
+        }
+        if(UserDefaults.standard.value(forKey: "userPoints") != nil){
+            userPoints = (UserDefaults.standard.value(forKey: "userPoints") as! Int)
+        }
+        if(UserDefaults.standard.value(forKey: "userName") != nil){
+            userName = (UserDefaults.standard.value(forKey: "userName") as! String)
+        }
         
         let when = DispatchTime.now() + 2
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -384,7 +393,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         if tableView == topicsTableView {
             
-            self.performSegue(withIdentifier: "goLive", sender: nil)
+            type = "HOST"
+            self.createGame()
+            
+            //Reduntant when creating game
+            //self.performSegue(withIdentifier: "goLive", sender: nil)
             
             print(indexPath.row)
             tableView.deselectRow(at: indexPath, animated: false)
@@ -486,32 +499,62 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
-    @IBAction func popupAcceptQuizClicked(_ sender: Any) {
-    }
-    
-    @IBAction func popupDenyQuizClicked(_ sender: Any) {
+    //Creates Game Session
+    func createGame(){
+        gameRef = ref.child("currentGames").childByAutoId()
         
-        self.denySession()
+        gameRef.child("leadboard/\(userID)/name").setValue(userName)
+        gameRef.child("leadboard/\(userID)/totalPoints").setValue(userPoints)
+        gameRef.child("leadboard/\(userID)/gamePoints").setValue(0)
         
-        self.popupHeight.constant = 0
-        
-        UIView.animate(withDuration: 0.25) {
-            
-            self.view.layoutIfNeeded()
-            self.popupBack.alpha = 0
-            
-            let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
-            statusBarWindow?.alpha = 1.0
-            
+        for friend in friendsInGame{
+            if friend != userID{
+                ref.child("users/\(friend)/pendingGames").setValue(gameRef.key)
+            }
         }
+        
+        self.performSegue(withIdentifier: "goLive", sender: nil)
     }
     
-    
-    func joinSession() {
+    func joinGame(gameKey: String, type: String){
         
     }
     
-    func denySession() {
+    //Observes Game Changes (HOST)
+    func followGame(gameRef: DatabaseReference){
+        gameRef.observe(.value, with: {(snapshot) in
+            
+            if( snapshot.value is NSNull){
+                print("Invalid of expired game")
+            }
+            
+            
+            
+        })
+    }
+    
+    //Observes Game Changes (GUEST)
+    func followGame(gameKey: String){
+        ref.child("currentGames").child(gameKey).observe(.value, with: {(snapshot) in
+            
+            if( snapshot.value is NSNull){
+                print("Invalid of expired game")
+            }
+            self.joinSession(gameKey: gameKey)
+            
+        })
+    }
+    
+    //Joins game if possible
+    func joinSession(gameKey: String){
+        
+        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/name").setValue(userName)
+        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/totalPoints").setValue(userPoints)
+        ref.child("currentGames/\(gameKey)/leadboard/\(userID)/gamePoints").setValue(0)
+
+    }
+    
+    func denySession(){
         if userID != ""{
             print("Session Denied")
             ref.child("users/\(userID)/pendingGames").removeValue()
