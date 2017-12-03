@@ -13,6 +13,7 @@ import FBSDKShareKit
 import SDWebImage
 import Firebase
 import GameKit
+import SwiftyJSON
 
 var type = String()
 var gameRef : DatabaseReference!
@@ -293,7 +294,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.gamePoints += self.pointsEarned
                 gameRef.child("leadboard/\(userID)/gamePoints").setValue(self.gamePoints)
                 userPoints += self.pointsEarned
-                self.leadPoints.text = "\(self.gamePoints)"
+                self.leadPoints.text = "\(self.gamePoints) pts"
                 saveProfile()
                 
                 self.answerStatus.image = UIImage(named: "check")
@@ -470,7 +471,7 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
     }
     
-    func generateQuestions(){
+    func generateQuestions() {
 //        var questionArray = [String]()
 //        var answerIndexArray = [Int]()
 //        var buttonOneArray = [String]()
@@ -752,6 +753,64 @@ class LiveVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             return 4
             }
             
+        
+    }
+    
+    func generateQuestions(topic: String) -> Void {
+        //        let url = "https://cram.heroku.com/questions?topic=\(topic)"
+        
+        guard let queryURL = URL(string: "http://cram.herokuapp.com/questions?topic=\(topic)") else {return}
+        
+        let session = URLSession.shared
+        session.dataTask(with: queryURL) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                //do {
+                let json = JSON(data)
+                let qCount = json.count
+                var i = 0
+                print(qCount)
+                //                print(json[0])
+                self.questions = []
+                while i < qCount {
+                    if (json[i]["similar_words"].count >= 3) {
+                        //                        print(json[i])
+                        let question = json[i]["question"]
+                        print(question)
+                        
+                        
+                        //                        self.questions.append(self.jsonToString(json: q as AnyObject))
+                    }
+                    i += 1
+                }
+                
+            }
+            }.resume()
+        
+        
+        
+        
+        //        var questionArray = [String]()
+        //        var answerIndexArray = [Int]()
+        //        var buttonOneArray = [String]()
+        //        var buttonTwoArray = [String]()
+        //        var buttonThreeArray = [String]()
+        //        var buttonFourArray = [String]()
+        //
+        //        for x in 0..<5{
+        //            questionArray.append("Question number \(x) ?")
+        //
+        //            buttonOneArray.append("Cell One")
+        //            buttonTwoArray.append("Cell Two")
+        //            buttonThreeArray.append("Cell Three")
+        //            buttonFourArray.append("Cell Four")
+        //
+        //            answerIndexArray.append(0)
+        //        }
+        
+        
         
     }
     
